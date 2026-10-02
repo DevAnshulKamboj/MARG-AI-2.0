@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARG AI : Movement Allocation and Rail Grid Planning</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="page">
+
+        <video class="bg-video" autoplay muted loop playsinline>
+            <source src="background_video.mp4" type="video/mp4">
+        </video>
+
+        <!-- TOP HEADER -->
+        <div class="top-header">
+            <img src="main_logo.png" class="logo" alt="MARG AI Logo">
+
+            <div class="title">
+                MARG AI : MOVEMENT ALLOCATION AND RAIL GRID PLANNING
+            </div>
+        </div>
+
+
+        <!-- SECURITY IMAGE -->
+        <img src="cybersecurity.png" class="side-image" alt="MARG AI Security Illustration">
+
+        <!-- LOGIN BOX -->
+        <div class="login-box">
+
+            <div class="login-header">
+                Sign In
+            </div>
+
+            <div class="login-content">
+
+                <!-- The backend logs users in by email address -->
+                <label>EMAIL</label>
+                <input
+                    type="email"
+                    id="username"
+                    placeholder="Please enter email"
+                    autocomplete="username"
+                >
+
+                <label>PASSWORD</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Please enter password"
+                    autocomplete="current-password"
+                >
+
+                <label>CAPTCHA</label>
+
+                <div class="captcha-row">
+                    <span id="captchaCode">QH I95</span>
+                    <button type="button" onclick="generateCaptcha()">↻</button>
+
+                    <input
+                        type="text"
+                        id="captchaInput"
+                        placeholder="Enter captcha"
+                        autocomplete="off"
+                    >
+                </div>
+
+                <div id="message" class="message" role="alert"></div>
+
+                <button type="button" class="signin-btn" id="signinBtn" onclick="loginUser()">
+                    ↪ Sign in
+                </button>
+
+                <div class="forgot-password">
+                    Forgot Password ?
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <span>SYNAPTEK</span>
+            <span>YMCA SIH 2026</span>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
