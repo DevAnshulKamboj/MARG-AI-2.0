@@ -5,7 +5,7 @@
 // (GitHub Pages, Netlify), set this to your deployed backend URL, e.g.
 // "https://your-backend.example.com" (no trailing slash).
 const API_BASE = window.location.hostname.endsWith("github.io")
-    ? "https://broad-justin-note-assumes.trycloudflare.com"
+    ? "https://thousands-settle-performer-airfare.trycloudflare.com  "
     : (window.location.port === "8000" ? "" : "http://127.0.0.1:8000");
 
 
