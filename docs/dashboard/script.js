@@ -1,5 +1,5 @@
 const API_BASE = window.location.hostname.endsWith("github.io")
-    ? "https://thousands-settle-performer-airfare.trycloudflare.com  "
+    ? "https://thousands-settle-performer-airfare.trycloudflare.com"
     : (window.location.port === "8000" ? "" : "http://127.0.0.1:8000");
 const TOKEN_KEY = "marg_access_token";
 const LOGIN_URL = "../";
