@@ -9,9 +9,9 @@
   ];
 
   var HELP_ITEMS = [
-    { q: "Help topic 1 goes here?", a: "Full explanation for help topic 1 goes here." },
-    { q: "Help topic 2 goes here?", a: "Full explanation for help topic 2 goes here." },
-    { q: "Help topic 3 goes here?", a: "Full explanation for help topic 3 goes here." }
+    { q: "How to use software", a: "Complete Manual will be provided on how to use our software." },
+    { q: "I have issues regarding software", a: "You can raise a complaint by clicking on report button." },
+    { q: "Some features are broken", a: "Yes we are aware of that, we are constantly fixing bugs and making our software better." }
   ];
 
   // Where the report form is sent (the backend endpoint must exist)
