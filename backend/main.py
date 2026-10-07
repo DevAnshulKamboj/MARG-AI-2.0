@@ -8,7 +8,7 @@ from fastapi.staticfiles import StaticFiles
 from core import models
 from core.database import Base, engine
 from auth.routes import router as auth_router
-
+from block_requests.routes import router as block_requests_router
 
 Base.metadata.create_all(bind=engine)
 
@@ -20,8 +20,16 @@ app = FastAPI(
     openapi_url=None
 )
 
+@app.middleware("http")
+async def no_cache(request, call_next):
+    response = await call_next(request)
+    if not request.url.path.startswith("/api"):
+        response.headers["Cache-Control"] = "no-store"
+    return response
+
 
 app.include_router(auth_router, prefix="/api")
+app.include_router(block_requests_router, prefix="/api")
 
 
 # Frontend files are inside the docs folder

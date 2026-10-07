@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | MARG AI</title>
+<script src="../auth-guard.js"></script>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helvetica,sans-serif;background:#eee;color:#111}
+.page{width:100%;height:100vh;display:flex;flex-direction:column;background:#eee}
+.top-header{height:43px;flex:0 0 43px;display:flex;align-items:center;justify-content:space-between;background:#f5f5f5;border-bottom:1px solid #8eafd6;padding:0 5px 0 10px}
+.brand{height:100%;display:flex;align-items:center;gap:7px;white-space:nowrap}
+.brand-logo{width:34px;height:34px;object-fit:cover;border-radius:50%}
+.brand-title{color:#263e69;font-size:17px;font-weight:700;letter-spacing:.2px}
+.user-area{height:100%;display:flex;align-items:center;gap:8px;color:#555;font-size:14px;white-space:nowrap}
+.user-icon{color:#aaa;font-size:22px;line-height:22px}
+.user-content{display:flex;flex-direction:column;align-items:flex-end;line-height:16px}
+.welcome{font-size:14px;font-weight:600;color:#444}
+.utility-links{display:flex;align-items:center;margin-top:3px}
+.utility-links a{font-size:11px;font-weight:700;letter-spacing:.6px;line-height:13px;color:#31517e;text-decoration:none;padding:1px 10px;border-left:1px solid #b8cbe6}
+.utility-links a:first-child{border-left:none}
+.utility-links a:last-child{padding-right:2px}
+.utility-links a:hover{color:#3f78bd;text-decoration:underline}
+.nav-bar{height:44px;flex:0 0 44px;display:flex;align-items:stretch;background:#eee;border-bottom:1px solid #7fa6d8}
+.nav-item{height:43px;display:flex;align-items:center;justify-content:center;padding:0 14px;border-left:1px solid #3f78bd;border-right:1px solid #3f78bd;border-top:1px solid #3f78bd;color:#111;font-size:21px;text-decoration:none;background:#eee}
+.nav-item:hover,.nav-item.active{background:#e5eaf0}
+.content{flex:1 1 auto;min-height:0;background:#eee;padding:16px 20px;overflow:auto;display:flex}
+.center-box{margin:auto;text-align:center;max-width:900px}
+.page-title{margin:0 0 12px;font-size:22px;color:#263e69}
+.page-text{margin:0 0 12px;font-size:15px;line-height:1.6;color:#333}
+.footer{height:20px;flex:0 0 20px;display:flex;align-items:center;justify-content:space-between;padding:0 8px;background:#eee;border-top:1px solid #9bb9dc;color:#31517e;font-size:8px;font-weight:700;letter-spacing:.2px}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="top-header">
+<div class="brand">
+<img src="../main_logo.png" class="brand-logo" alt="MARG AI logo">
+<div class="brand-title">MARG AI : MOVEMENT ALLOCATION AND RAIL GRID PLANNING</div>
+</div>
+<div class="user-area">
+<div class="user-icon">♟</div>
+<div class="user-content">
+<div class="welcome">Welcome, chiefcontrollerumb</div>
+<div class="utility-links">
+<a href="#" id="faqLink">FAQ</a>
+<a href="#" id="helpLink">HELP</a>
+<a href="#" id="reportLink">REPORT</a>
+<a id="logoutLink" href="../index.html">LOGOUT</a>
+</div>
+</div>
+</header>
+<nav class="nav-bar">
+<a class="nav-item" href="../dashboard/dashboard.html">Dashboard</a>
+<a class="nav-item" href="../block-request/block-requests.html">Block Requests</a>
+<a class="nav-item" href="../priority-list/priority-list.html">Priority List</a>
+<a class="nav-item" href="../scheduler/scheduler.html">Scheduler</a>
+<a class="nav-item" href="../live-tracker/live-tracker.html">Live Tracker</a>
+<a class="nav-item" href="../live-map/live-map.html">Live Map</a>
+</nav>
+<main class="content">
+<div class="center-box">
+<h2 class="page-title">Currently Under Development</h2>
+<p class="page-text"></p>
+</div>
+</main>
+<footer class="footer">
+<span>SYNAPTEK</span>
+<span>YMCA SIH 2026</span>
+</footer>
+</div>
+<script src="../header-tools.js"></script>
+<script src="../logout.js"></script>
+</body>
+</html>

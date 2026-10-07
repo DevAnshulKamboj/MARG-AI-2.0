@@ -11,7 +11,7 @@ const API_BASE = window.location.hostname.endsWith("github.io")
 
 // Where to send the user after a successful login.
 // Set this to your dashboard page once you have one, e.g. "/static/dashboard.html".
-const DASHBOARD_URL = "dashboard/";
+const DASHBOARD_URL = "dashboard/dashboard.html";
 const TOKEN_KEY = "marg_access_token";
 
 

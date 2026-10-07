@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Block Requests | MARG AI</title>
+<script src="../auth-guard.js"></script>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helvetica,sans-serif;background:#eee;color:#111}
+.page{width:100%;height:100vh;display:flex;flex-direction:column;background:#eee}
+.top-header{height:43px;flex:0 0 43px;display:flex;align-items:center;justify-content:space-between;background:#f5f5f5;border-bottom:2px solid #3f78bd;padding:0 5px 0 10px}
+.brand{height:100%;display:flex;align-items:center;gap:7px;white-space:nowrap}
+.brand-logo{width:34px;height:34px;object-fit:cover;border-radius:50%}
+.brand-title{color:#263e69;font-size:17px;font-weight:700;letter-spacing:.2px}
+.user-area{height:100%;display:flex;align-items:center;gap:8px;color:#555;font-size:14px;white-space:nowrap}
+.user-icon{color:#aaa;font-size:22px;line-height:22px}
+.user-content{display:flex;flex-direction:column;align-items:flex-end;line-height:16px}
+.welcome{font-size:14px;font-weight:600;color:#444}
+.utility-links{display:flex;align-items:center;margin-top:3px}
+.utility-links a{font-size:11px;font-weight:700;letter-spacing:.6px;line-height:13px;color:#31517e;text-decoration:none;padding:1px 10px;border-left:1px solid #b8cbe6}
+.utility-links a:first-child{border-left:none}
+.utility-links a:last-child{padding-right:2px}
+.utility-links a:hover{color:#3f78bd;text-decoration:underline}
+.nav-bar{height:44px;flex:0 0 44px;display:flex;align-items:stretch;background:#eee;border-bottom:2px solid #3f78bd}
+.nav-item{height:42px;display:flex;align-items:center;justify-content:center;padding:0 14px;border-left:1px solid #3f78bd;border-right:1px solid #3f78bd;color:#111;font-size:21px;text-decoration:none;background:#eee}
+.nav-item{height:42px;display:flex;align-items:center;justify-content:center;padding:0 14px;border-left:1px solid #3f78bd;border-right:1px solid #3f78bd;color:#111;font-size:21px;text-decoration:none;background:#eee}
+.footer{height:20px;flex:0 0 20px;display:flex;align-items:center;justify-content:space-between;padding:0 8px;background:#eee;border-top:1px solid #9bb9dc;color:#31517e;font-size:8px;font-weight:700;letter-spacing:.2px}
+
+/* Content area */
+.content{flex:1 1 auto;min-height:0;background:#eee;padding:10px 12px;display:flex;flex-direction:column;overflow:hidden}
+
+/* Toolbar: Show rows (left) and search (right) */
+.toolbar{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.show-rows{display:flex;align-items:center;gap:8px;font-size:15px;color:#555}
+.show-rows select{height:34px;padding:0 10px;font-size:14px;color:#333;background:#fff;border:1px solid #cfd6df;border-radius:5px;outline:none;cursor:pointer}
+.show-rows select:focus,.search-box input:focus{border-color:#3f78bd}
+.search-box{position:relative}
+.search-box svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:#777;pointer-events:none}
+.search-box input{width:250px;height:38px;padding:0 12px 0 34px;font-size:14px;color:#333;background:#fff;border:1px solid #cfd6df;border-radius:5px;outline:none}
+
+/* Table */
+.table-wrap{flex:1 1 auto;min-height:0;overflow:auto;background:#fff;border:1px solid #9bb9dc}
+#blockTable{border-collapse:collapse;table-layout:fixed;font-size:13px}
+#blockTable th{position:sticky;top:0;background:#dfe8f5;color:#263e69;text-align:left;padding:8px 10px;border:1px solid #b8cbe6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#blockTable td{padding:8px 10px;border:1px solid #d5deea;vertical-align:top;overflow-wrap:anywhere}
+#blockTable td.empty{text-align:center;color:#777;padding:18px}
+/* Green group: Block ID to Line */
+#blockTable th.green{background:#b3e0ad}
+#blockTable td.green{background:#e8f7e5}
+
+/* Blue group: From to Quantum of Work */
+#blockTable th.blue{background:#b5d8f2}
+#blockTable td.blue{background:#e0eefa}
+
+/* Total records (bottom left) */
+.table-footer{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;margin-top:10px;font-size:15px;color:#555}
+.table-footer b{color:#333}
+.match-info{color:#31517e;font-size:13px;margin-left:8px}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="top-header">
+<div class="brand">
+<img src="../main_logo.png" class="brand-logo" alt="MARG AI logo">
+<div class="brand-title">MARG AI : MOVEMENT ALLOCATION AND RAIL GRID PLANNING</div>
+</div>
+<div class="user-area">
+<div class="user-icon">♟</div>
+<div class="user-content">
+<div class="welcome">Welcome, chiefcontrollerumb</div>
+<div class="utility-links">
+<a href="#" id="faqLink">FAQ</a>
+<a href="#" id="helpLink">HELP</a>
+<a href="#" id="reportLink">REPORT</a>
+<a id="logoutLink" href="../index.html">LOGOUT</a>
+</div>
+</div>
+</div>
+</header>
+<nav class="nav-bar">
+<a class="nav-item" href="../dashboard/dashboard.html">Dashboard</a>
+<a class="nav-item active" href="../block-request/block-requests.html">Block Requests</a>
+<a class="nav-item" href="../priority-list/priority-list.html">Priority List</a>
+<a class="nav-item" href="../scheduler/scheduler.html">Scheduler</a>
+<a class="nav-item" href="../live-tracker/live-tracker.html">Live Tracker</a>
+<a class="nav-item" href="../live-map/live-map.html">Live Map</a>
+</nav>
+
+<main class="content">
+<div class="toolbar">
+<div class="show-rows">
+<span>Show</span>
+<select id="rowsSelect">
+<option value="10">10</option>
+<option value="50">50</option>
+<option value="100">100</option>
+<option value="all">All</option>
+</select>
+<span>Rows</span>
+</div>
+<div class="search-box">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+<input type="search" id="searchBox" placeholder="Search records..." autocomplete="off">
+</div>
+</div>
+
+<div class="table-wrap">
+<table id="blockTable">
+<thead id="blockHead"></thead>
+<tbody id="blockBody"></tbody>
+</table>
+</div>
+
+<div class="table-footer">
+<div><span id="totalText">Loading...</span><span class="match-info" id="matchInfo"></span></div>
+</div>
+</main>
+
+<footer class="footer">
+<span>SYNAPTEK</span>
+<span>YMCA SIH 2026</span>
+</footer>
+</div>
+
+<script>
+(function () {
+  // Keep your own working address here if you already set one
+  var BASE = window.location.hostname.endsWith("github.io")
+    ? "https://YOUR-CURRENT-TUNNEL.trycloudflare.com"
+    : (window.location.port === "8000" ? "" : "http://127.0.0.1:8000");
+  var TOKEN = sessionStorage.getItem("marg_access_token");
+
+  // [database column, heading, width in px]
+  var COLUMNS = [
+  ["sr_no", "Sr No", 70, ""],
+  ["block_id", "Block ID", 150, "green"],
+  ["date_requested", "Date", 110, "green"],
+  ["sub_section", "Sub Section", 220, "green"],
+  ["block_section_station", "Station", 150, "green"],
+  ["direction", "Direction", 90, "green"],
+  ["line", "Line", 130, "green"],
+ ["from_stn", "From (Km)", 100, "blue"],
+["to_stn", "To (Km)", 100, "blue"],
+  ["total_distance", "Distance", 90, "blue"],
+  ["duration", "Duration", 90, "blue"],
+  ["department", "Dept", 80, "blue"],
+  ["reason", "Reason", 420, "blue"],
+  ["quantum_of_work", "Quantum of Work", 360, "blue"],
+  ["remark", "Remark", 300, ""]
+];
+
+  var allRows = [];
+  var rowsSelect = document.getElementById("rowsSelect");
+  var searchBox = document.getElementById("searchBox");
+  var totalText = document.getElementById("totalText");
+  var matchInfo = document.getElementById("matchInfo");
+  var head = document.getElementById("blockHead");
+  var body = document.getElementById("blockBody");
+  var table = document.getElementById("blockTable");
+
+  function buildHeader() {
+    var colgroup = document.createElement("colgroup");
+    var totalWidth = 0;
+    var hr = document.createElement("tr");
+    COLUMNS.forEach(function (c) {
+      var col = document.createElement("col");
+      col.style.width = c[2] + "px";
+      colgroup.appendChild(col);
+      totalWidth += c[2];
+      var th = document.createElement("th");
+      th.textContent = c[1];
+      th.title = c[1];
+      if (c[3]) th.className = c[3];
+      hr.appendChild(th);
+    });
+    table.insertBefore(colgroup, table.firstChild);
+    table.style.width = totalWidth + "px";
+    head.innerHTML = "";
+    head.appendChild(hr);
+  }
+
+    // Columns shown with 3 decimals (km.metres, e.g. 210.100)
+  var THREE_DECIMALS = { from_stn: true, to_stn: true };
+
+  function cellText(row, key) {
+    var v = row[key];
+    if (v === null || v === undefined) return "";
+    if (THREE_DECIMALS[key]) {
+      var n = Number(v);
+      if (!isNaN(n)) return n.toFixed(3);
+    }
+    return String(v);
+  }
+
+  function render() {
+    var term = searchBox.value.trim().toLowerCase();
+
+        var filtered = allRows.filter(function (row) {
+      if (!term) return true;
+      return COLUMNS.some(function (c) {
+        return cellText(row, c[0]).toLowerCase().indexOf(term) !== -1;
+      });
+    });
+
+    var limit = rowsSelect.value === "all" ? filtered.length : parseInt(rowsSelect.value, 10);
+    var shown = filtered.slice(0, limit);
+
+    body.innerHTML = "";
+    if (shown.length === 0) {
+      var er = document.createElement("tr");
+      var ed = document.createElement("td");
+      ed.colSpan = COLUMNS.length;
+      ed.className = "empty";
+      ed.textContent = "No records found";
+      er.appendChild(ed);
+      body.appendChild(er);
+    }
+    shown.forEach(function (row) {
+      var tr = document.createElement("tr");
+      COLUMNS.forEach(function (c) {
+        var td = document.createElement("td");
+        if (c[3]) td.className = c[3];
+                td.textContent = cellText(row, c[0]);
+        tr.appendChild(td);
+      });
+      body.appendChild(tr);
+    });
+
+    totalText.innerHTML = "Total Records: <b>" + allRows.length + "</b>";
+    matchInfo.textContent = term ? "(" + filtered.length + " matching, showing " + shown.length + ")" : "";
+  }
+
+  async function load() {
+    if (!TOKEN) { window.location.replace("../index.html"); return; }
+    buildHeader();
+
+    try {
+      var res = await fetch(BASE.trim() + "/api/block-requests", {
+        headers: { "Authorization": "Bearer " + TOKEN }
+      });
+      if (res.status === 401 || res.status === 403) { window.location.replace("../index.html"); return; }
+      if (!res.ok) { totalText.textContent = "Could not load block requests."; return; }
+
+      allRows = await res.json();
+      render();
+    } catch (e) {
+      totalText.textContent = "Cannot reach the server.";
+    }
+  }
+
+  rowsSelect.addEventListener("change", render);
+  searchBox.addEventListener("input", render);
+
+  load();
+})();
+</script>
+<script src="../header-tools.js"></script>
+<script src="../logout.js"></script>
+</body>
+</html>
