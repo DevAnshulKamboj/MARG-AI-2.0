@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Block Requests | MARG AI</title>
-<script src="../auth-guard.js"></script>
+<!-- <script src="../auth-guard.js"></script> -->
 <style>
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helvetica,sans-serif;background:#eee;color:#111}
@@ -128,7 +128,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
 (function () {
   // Keep your own working address here if you already set one
   var BASE = window.location.hostname.endsWith("github.io")
-    ? " https://william-warren-plastics-removed.trycloudflare.com"
+    ? "https://genre-workflow-minneapolis-examination.trycloudflare.com"
     : (window.location.port === "8000" ? "" : "http://127.0.0.1:8000");
   var TOKEN = sessionStorage.getItem("marg_access_token");
 
@@ -232,15 +232,30 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
     matchInfo.textContent = term ? "(" + filtered.length + " matching, showing " + shown.length + ")" : "";
   }
 
-  async function load() {
-    if (!TOKEN) { window.location.replace("../index.html"); return; }
-    buildHeader();
+    async function load() {
+    var fromDisk = window.location.protocol === "file:";
+    buildHeader();   // draw the table headers even when there is no data
+
+    if (!TOKEN) {
+      if (fromDisk) {
+        // Opened as a plain file for front-end testing: no login, no data
+        totalText.textContent = "Preview mode: open through the backend to load data.";
+        render();
+        return;
+      }
+      window.location.replace("../index.html");
+      return;
+    }
 
     try {
       var res = await fetch(BASE.trim() + "/api/block-requests", {
         headers: { "Authorization": "Bearer " + TOKEN }
       });
-      if (res.status === 401 || res.status === 403) { window.location.replace("../index.html"); return; }
+      if (res.status === 401 || res.status === 403) {
+        if (!fromDisk) window.location.replace("../index.html");
+        else totalText.textContent = "Not authorised (preview mode).";
+        return;
+      }
       if (!res.ok) { totalText.textContent = "Could not load block requests."; return; }
 
       allRows = await res.json();
