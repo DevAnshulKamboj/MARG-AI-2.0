@@ -24,13 +24,184 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
 .utility-links a:hover{color:#3f78bd;text-decoration:underline}
 .nav-bar{height:44px;flex:0 0 44px;display:flex;align-items:stretch;background:#eee;border-bottom:2px solid #3f78bd}
 .nav-item{height:42px;display:flex;align-items:center;justify-content:center;padding:0 14px;border-left:1px solid #3f78bd;border-right:1px solid #3f78bd;color:#111;font-size:21px;text-decoration:none;background:#eee}
-.nav-item{height:42px;display:flex;align-items:center;justify-content:center;padding:0 14px;border-left:1px solid #3f78bd;border-right:1px solid #3f78bd;color:#111;font-size:21px;text-decoration:none;background:#eee}
 .footer{height:20px;flex:0 0 20px;display:flex;align-items:center;justify-content:space-between;padding:0 8px;background:#eee;border-top:1px solid #9bb9dc;color:#31517e;font-size:8px;font-weight:700;letter-spacing:.2px}
 
 /* Content area */
-.content{flex:1 1 auto;min-height:0;background:#eee;padding:10px 12px;display:flex;flex-direction:column;overflow:hidden}
+.content{flex:1 1 auto;min-height:0;background:#eee;padding:15px;display:flex;flex-direction:column;overflow-y:auto}
 
-/* Toolbar: Show rows (left) and search (right) */
+/* -------------------------------------------
+   NEW DEMAND FORM STYLES
+------------------------------------------- */
+.demand-form-container {
+    background: #fff;
+    border: 1px solid #d5deea;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+    flex-shrink: 0;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+}
+.form-banner {
+    background-color: #5a52a5; 
+    color: #fff;
+    padding: 12px 18px;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.form-banner svg {
+    width: 20px;
+    height: 20px;
+}
+.form-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #f4f6f9;
+}
+.form-section {
+    background: #fff;
+    border: 1px solid #e0e5eb;
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.form-section-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: #263e69;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+.form-section-title svg {
+    color: #5a52a5;
+}
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    align-items: start;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.form-group label {
+    font-size: 13px;
+    color: #444;
+    font-weight: 600;
+}
+.form-group input, .form-group select, .form-group textarea {
+    padding: 10px 12px;
+    border: 1px solid #cfd6df;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #333;
+    outline: none;
+    font-family: inherit;
+    background: #fff;
+    width: 100%;
+    transition: all 0.2s;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: #5a52a5;
+    box-shadow: 0 0 0 3px rgba(90, 82, 165, 0.1);
+}
+.form-group textarea {
+    resize: vertical;
+}
+.form-group input[readonly]{background:#eef1f5;cursor:not-allowed}
+.combo{position:relative}
+.combo input{padding-right:32px;cursor:pointer}
+.combo input:disabled{background:#eef1f5;cursor:not-allowed}
+.combo-arrow{position:absolute;right:13px;top:50%;width:7px;height:7px;border-right:2px solid #333;border-bottom:2px solid #333;transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.combo input:disabled ~ .combo-arrow{opacity:.35}
+.combo-list{display:none;position:absolute;left:0;right:0;top:100%;margin:2px 0 0;padding:0;list-style:none;background:#fff;border:1px solid #767676;max-height:220px;overflow-y:auto;z-index:50;box-shadow:0 4px 10px rgba(0,0,0,.12)}
+.combo.open .combo-list{display:block}
+.combo-list li{padding:6px 16px;font-size:13px;color:#222;cursor:default}
+.combo-list li:hover,.combo-list li.active{background:#1a66d2;color:#fff}
+.combo-list li.empty{color:#888;background:#fff}
+/* Updated Location Block Styles */
+.location-block {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.location-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #555;
+}
+.location-title svg {
+    width: 16px;
+    height: 16px;
+    color: #555;
+}
+.location-fields {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.location-fields span {
+    font-size: 13px;
+    color: #666;
+    font-weight: 600;
+}
+.small-input {
+    width: 80px;
+    padding: 8px 10px;
+    border: 1px solid #cfd6df;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #333;
+    outline: none;
+    transition: all 0.2s;
+}
+.small-input:focus {
+    border-color: #5a52a5;
+    box-shadow: 0 0 0 3px rgba(90, 82, 165, 0.1);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 10px;
+}
+.btn-action {
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #28a745; 
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+}
+.btn-action:hover {
+    background-color: #218838;
+}
+
+/* -------------------------------------------
+   EXISTING TOOLBAR & TABLE ADJUSTMENTS
+------------------------------------------- */
 .toolbar{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .show-rows{display:flex;align-items:center;gap:8px;font-size:15px;color:#555}
 .show-rows select{height:34px;padding:0 10px;font-size:14px;color:#333;background:#fff;border:1px solid #cfd6df;border-radius:5px;outline:none;cursor:pointer}
@@ -39,24 +210,38 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
 .search-box svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:#777;pointer-events:none}
 .search-box input{width:250px;height:38px;padding:0 12px 0 34px;font-size:14px;color:#333;background:#fff;border:1px solid #cfd6df;border-radius:5px;outline:none}
 
-/* Table */
-.table-wrap{flex:1 1 auto;min-height:0;overflow:auto;background:#fff;border:1px solid #9bb9dc}
+.table-wrap{flex:none;height:450px;overflow:auto;background:#fff;border:1px solid #9bb9dc}
 #blockTable{border-collapse:collapse;table-layout:fixed;font-size:13px}
-#blockTable th{position:sticky;top:0;background:#dfe8f5;color:#263e69;text-align:left;padding:8px 10px;border:1px solid #b8cbe6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#blockTable th{position:sticky;top:0;background:#dfe8f5;color:#263e69;text-align:left;padding:8px 10px;border:1px solid #b8cbe6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; z-index:1}
 #blockTable td{padding:8px 10px;border:1px solid #d5deea;vertical-align:top;overflow-wrap:anywhere}
 #blockTable td.empty{text-align:center;color:#777;padding:18px}
-/* Green group: Block ID to Line */
 #blockTable th.green{background:#b3e0ad}
 #blockTable td.green{background:#e8f7e5}
-
-/* Blue group: From to Quantum of Work */
 #blockTable th.blue{background:#b5d8f2}
 #blockTable td.blue{background:#e0eefa}
 
-/* Total records (bottom left) */
 .table-footer{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;margin-top:10px;font-size:15px;color:#555}
 .table-footer b{color:#333}
 .match-info{color:#31517e;font-size:13px;margin-left:8px}
+
+.section-divider {
+    border: 0;
+    border-top: 2px dashed #9bb9dc;
+    margin: 10px 0 20px 0;
+    width: 100%;
+}
+
+/* Explicit two-column grid for perfect alignment in Asset Details */
+.two-col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+@media (max-width: 768px) {
+    .two-col-grid {
+        grid-template-columns: 1fr;
+    }
+}
 </style>
 </head>
 <body>
@@ -89,6 +274,211 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
 </nav>
 
 <main class="content">
+
+<!-- NEW DEMAND FORM -->
+<div class="demand-form-container">
+    <div class="form-banner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+        New Disconnection/block demand
+    </div>
+    
+    <form id="blockDemandForm" class="form-body">
+        
+        <!-- A) Section Details -->
+        <div class="form-section">
+            <div class="form-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+                Section Details
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Station</label>
+                    <select name="station" id="sectionSelect">
+                        <option value="">Select Section</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Sub Section (Traffic Section)</label>
+                    <div class="combo" id="subCombo">
+                        <input type="text" name="sub_section" id="subSectionInput"
+                            placeholder="Select Section first" autocomplete="off" disabled>
+                        <span class="combo-arrow"></span>
+                        <ul class="combo-list" id="subSectionList"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- B) Asset Detail -->
+        <div class="form-section">
+            <div class="form-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                Asset Detail
+            </div>
+            
+            <!-- ROW 1: Direction and Line -->
+            <div class="two-col-grid" style="margin-bottom: 20px;">
+                <div class="form-group">
+                    <label>Direction</label>
+                    <select name="direction" id="directionSelect">
+                        <option value="">Select Direction</option>
+                        <option value="Up">Up</option>
+                        <option value="Down">Down</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Line</label>
+                    <select name="line" id="lineInput">
+                        <option value="">Select Line</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- ROW 2: Locations grouped on Left, Machine on Right -->
+            <div class="two-col-grid">
+                
+                <!-- Left Side: Both Location Blocks -->
+                <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+                    <!-- Location From block -->
+                    <div class="location-block">
+                        <div class="location-title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            Location From:
+                        </div>
+                        <div class="location-fields">
+                            <span>KM</span>
+                            <input type="number" name="km_from" class="small-input">
+                            <span>Meter</span>
+                            <input type="number" name="meter_from" class="small-input">
+                        </div>
+                    </div>
+
+                    <!-- Location To block -->
+                    <div class="location-block">
+                        <div class="location-title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            Location To:
+                        </div>
+                        <div class="location-fields">
+                            <span>KM</span>
+                            <input type="number" name="km_to" class="small-input">
+                            <span>Meter</span>
+                            <input type="number" name="meter_to" class="small-input">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side: Machine block (aligned perfectly under Line) -->
+                <div class="form-group">
+                    <label>Machine</label>
+                      <select name="machine">
+                          <option value="">Select Machine</option>
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option>
+                      </select>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- C) Block Details -->
+        <div class="form-section">
+            <div class="form-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Block Details
+            </div>
+            
+            <!-- Row 1 -->
+            <div class="form-row" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 20px;">
+                <div class="form-group">
+                    <label>Dept</label>
+                    <select name="dept" id="deptSelect">                      
+                           <option value="">Select Dept</option>
+                           <option value="S&T">S&T</option>
+                           <option value="Engineering">Engineering</option>
+                           <option value="Elect">Elect</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Disconnection/Block Demanded For</label>
+                    <select name="demanded_for" id="demandedForSelect" disabled>  
+                           <option value="">Select Reason</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Row 2 -->
+            <div class="form-row" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 20px;">
+                <div class="form-group">
+                    <label>Demanded From(Date/Time)</label>
+                    <input type="datetime-local" name="demanded_from" id="demandedFrom">
+                </div>
+                <div class="form-group">
+                    <label>Demanded To(Date/Time)</label>
+                    <input type="datetime-local" name="demanded_to" id="demandedTo">
+                </div>
+                <div class="form-group">
+                    <label>Duration</label>
+                    <input type="text" name="duration" id="durationInput" placeholder="Auto-calculated" readonly>
+                </div>
+            </div>
+            
+            <!-- Row 3 -->
+            <div class="form-row" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                <div class="form-group">
+                    <label>Minimum Duration</label>
+                    <input type="number" name="min_duration" min="1" placeholder="Minutes, e.g. 30">                </div>
+                <!-- Empty divs to maintain the 3-column alignment on desktop -->
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        
+        <!-- D) Additional Details -->
+        <div class="form-section">
+            <div class="form-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                Additional Details
+            </div>
+            <div class="form-row" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                <div class="form-group">
+                    <label>Quantum of work</label>
+                    <textarea name="quantum_of_work" rows="3" placeholder="Enter work details..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Resource Required detail(If any)</label>
+                    <textarea name="resource_required" rows="3" placeholder="Enter required resources..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Remarks (If any)</label>
+                    <textarea name="remarks" rows="3" placeholder="Additional remarks..."></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Form Buttons -->
+        <div class="form-actions">
+            <button type="button" class="btn-action">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                Save
+            </button>
+            <button type="button" class="btn-action">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+                Clear
+            </button>
+        </div>
+    </form>
+</div>
+
+<hr class="section-divider">
+
+<!-- EXISTING TABLE SECTION -->
 <div class="toolbar">
 <div class="show-rows">
 <span>Show</span>
@@ -126,29 +516,30 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
 
 <script>
 (function () {
-  // Keep your own working address here if you already set one
   var BASE = window.location.hostname.endsWith("github.io")
-    ? "https://genre-workflow-minneapolis-examination.trycloudflare.com"
+    ? " https://william-warren-plastics-removed.trycloudflare.com"
     : (window.location.port === "8000" ? "" : "http://127.0.0.1:8000");
   var TOKEN = sessionStorage.getItem("marg_access_token");
 
-  // [database column, heading, width in px]
   var COLUMNS = [
   ["sr_no", "Sr No", 70, ""],
   ["block_id", "Block ID", 150, "green"],
-  ["date_requested", "Date", 110, "green"],
+  ["station", "Station", 150, "green"],
   ["sub_section", "Sub Section", 220, "green"],
-  ["block_section_station", "Station", 150, "green"],
   ["direction", "Direction", 90, "green"],
-  ["line", "Line", 130, "green"],
- ["from_stn", "From (Km)", 100, "blue"],
-["to_stn", "To (Km)", 100, "blue"],
-  ["total_distance", "Distance", 90, "blue"],
-  ["duration", "Duration", 90, "blue"],
-  ["department", "Dept", 80, "blue"],
-  ["reason", "Reason", 420, "blue"],
+  ["line", "Line", 150, "green"],
+  ["location_from", "From (Km)", 100, "blue"],
+  ["location_to", "To (Km)", 100, "blue"],
+  ["machine", "Machine", 180, "blue"],
+  ["dept", "Dept", 80, "blue"],
+  ["block_demanded_for", "Block Demanded For", 260, "blue"],
+  ["demanded_from", "Demanded From", 150, "blue"],
+  ["demanded_to", "Demanded To", 150, "blue"],
+  ["duration", "Duration", 100, "blue"],
+  ["min_duration", "Min Duration", 120, "blue"],
   ["quantum_of_work", "Quantum of Work", 360, "blue"],
-  ["remark", "Remark", 300, ""]
+  ["resource_required", "Resource Required", 260, ""],
+  ["remarks", "Remarks", 300, ""]
 ];
 
   var allRows = [];
@@ -181,8 +572,24 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
     head.appendChild(hr);
   }
 
-    // Columns shown with 3 decimals (km.metres, e.g. 210.100)
-  var THREE_DECIMALS = { from_stn: true, to_stn: true };
+  var THREE_DECIMALS = { location_from: true, location_to: true };
+  var DURATION_KEYS = { duration: true, min_duration: true };
+  var DATETIME_KEYS = { demanded_from: true, demanded_to: true };
+
+  function pad(n) { return String(n).padStart(2, "0"); }
+
+  // The API sends intervals as seconds, e.g. 14400 -> 04:00:00
+  function formatDuration(v) {
+    var total = Math.round(Number(v));
+    if (isNaN(total)) return String(v);
+    return pad(Math.floor(total / 3600)) + ":" + pad(Math.floor((total % 3600) / 60)) + ":" + pad(total % 60);
+  }
+
+  // 2026-10-04T10:00:00 -> 04-10-2026 10:00
+  function formatDateTime(v) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2})/.exec(String(v));
+    return m ? m[3] + "-" + m[2] + "-" + m[1] + " " + m[4] + ":" + m[5] : String(v);
+  }
 
   function cellText(row, key) {
     var v = row[key];
@@ -191,13 +598,15 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
       var n = Number(v);
       if (!isNaN(n)) return n.toFixed(3);
     }
+    if (DURATION_KEYS[key]) return formatDuration(v);
+    if (DATETIME_KEYS[key]) return formatDateTime(v);
     return String(v);
   }
 
   function render() {
     var term = searchBox.value.trim().toLowerCase();
 
-        var filtered = allRows.filter(function (row) {
+    var filtered = allRows.filter(function (row) {
       if (!term) return true;
       return COLUMNS.some(function (c) {
         return cellText(row, c[0]).toLowerCase().indexOf(term) !== -1;
@@ -222,7 +631,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
       COLUMNS.forEach(function (c) {
         var td = document.createElement("td");
         if (c[3]) td.className = c[3];
-                td.textContent = cellText(row, c[0]);
+        td.textContent = cellText(row, c[0]);
         tr.appendChild(td);
       });
       body.appendChild(tr);
@@ -232,13 +641,12 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
     matchInfo.textContent = term ? "(" + filtered.length + " matching, showing " + shown.length + ")" : "";
   }
 
-    async function load() {
+  async function load() {
     var fromDisk = window.location.protocol === "file:";
-    buildHeader();   // draw the table headers even when there is no data
+    buildHeader();
 
     if (!TOKEN) {
       if (fromDisk) {
-        // Opened as a plain file for front-end testing: no login, no data
         totalText.textContent = "Preview mode: open through the backend to load data.";
         render();
         return;
@@ -269,6 +677,372 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
   searchBox.addEventListener("input", render);
 
   load();
+})();
+</script>
+<script>
+(function () {
+  // ---- Dept -> "Block Demanded For" mapping ----
+  var REASONS = {
+    "S&T": [
+      "Repair of relay wire",
+      "Faulty Signal replacement",
+      "Junction box repair",
+      "Axle counter repair",
+      "Relay wire inspection"
+    ],
+    "Engineering": [
+      "Track inspection",
+      "Track alignment correction",
+      "Rail replacement",
+      "Weld repair or rail welding",
+      "Tamping and track packing"
+    ],
+    "Elect": [
+      "OHE inspection",
+      "OHE wire replacement",
+      "OHE tensioning equipment maintenance",
+      "OHE mast or structure repair",
+      "OHE registration adjustment"
+    ]
+  };
+
+  var dept = document.getElementById("deptSelect");
+  var reason = document.getElementById("demandedForSelect");
+
+  function fillReasons() {
+    var list = REASONS[dept.value] || [];
+    reason.innerHTML = "";
+
+    var first = document.createElement("option");
+    first.value = "";
+    first.textContent = list.length ? "Select Reason" : "Select Dept first";
+    reason.appendChild(first);
+
+    list.forEach(function (r) {
+      var o = document.createElement("option");
+      o.value = r;
+      o.textContent = r;
+      reason.appendChild(o);
+    });
+
+    reason.disabled = list.length === 0;   // blanked out until a dept is chosen
+  }
+  dept.addEventListener("change", fillReasons);
+  fillReasons();
+
+  // ---- Auto Duration ----
+  var from = document.getElementById("demandedFrom");
+  var to = document.getElementById("demandedTo");
+  var dur = document.getElementById("durationInput");
+
+  function calcDuration() {
+    if (!from.value || !to.value) { dur.value = ""; return; }
+    var mins = Math.round((new Date(to.value) - new Date(from.value)) / 60000);
+    if (mins <= 0) { dur.value = ""; alert("End time must be after start time."); return; }
+    var h = Math.floor(mins / 60), m = mins % 60;
+    dur.value = mins + " mins" + (h ? " (" + h + " hr " + m + " min)" : "");
+  }
+  from.addEventListener("change", calcDuration);
+  to.addEventListener("change", calcDuration);
+
+  // ---- Make the Clear button reset everything ----
+  var form = document.getElementById("blockDemandForm");
+  var clearBtn = form.querySelectorAll(".btn-action")[1];
+  clearBtn.addEventListener("click", function () {
+    form.reset();
+    fillReasons();
+    dur.value = "";
+  });
+})();
+</script>
+<script>
+(function () {
+  // ---- DATA: section -> line + sub sections ----
+  var SECTIONS = {
+    "AMBALA CANTT - CHANDIGARH": {
+      line: "LINE 1",
+      subs: [
+        "AMBALA CANT JN - DHULKOT",
+        "DHULKOT - LALRU",
+        "LALRU - DAPPAR",
+        "DAPPAR - CHANDIGARH"
+      ]
+    },
+    "RAJPURA JN - MOHANPURA": {
+      line: "LINE 2",
+      subs: [
+        "RAJPURA JN - DAUN KALAN",
+        "DAUN KALAN - PATIALA",
+        "PATIALA - PATIALA CANTT.",
+        "PATIALA CANTT. - DHABLAN",
+        "DHABLAN - NABHA",
+        "NABHA - KAKRALA",
+        "KAKRALA - KAULSERI",
+        "KAULSERI - DHURI JN",
+        "DHURI JN - ALAL",
+        "ALAL - SEKHA",
+        "SEKHA - BARNALA",
+        "BARNALA - HADIAYA",
+        "HADIAYA - TAPA",
+        "TAPA - JETHUKE",
+        "JETHUKE - RAMPURA PHUL",
+        "RAMPURA PHUL - LEHRA MUHABBAT",
+        "LEHRA MUHABBAT - BHUCHUCHU",
+        "BHUCHUCHU - BHATINDA CANTT",
+        "BHATINDA CANTT - BAHMAN DIWANA",
+        "BAHMAN DIWANA - BULLUANA",
+        "BULLUANA - GIDDARBAHA",
+        "GIDDARBAHA - FAQARSAR",
+        "FAQARSAR - MALOUT",
+        "MALOUT - PAKKI",
+        "PAKKI - PAKKI",
+        "BAHAWAL BASI - BAHAWAL BASI",
+        "ABOHAR - KILANWALI PUNJAB",
+        "KILANWALI PUNJAB - PANJU KOSI",
+        "PANJU KOSI - BAKAYANWALA",
+        "BAKAYANWALA - KOTHA PAKKI",
+        "KOTHA PAKKI - HINDUMALKOTE",
+        "HINDUMALKOTE - FATUHI",
+        "FATUHI - MOHANPURA"
+      ]
+    },
+    "AMBALA CANT JN - SAHARANPUR": {
+      line: "LINE 3",
+      subs: [
+        "AMBALA CANT JN - DUKHERI",
+        "DUKHERI - KESRI",
+        "KESRI - TANDWAL",
+        "TANDWAL - BARARA",
+        "BARARA - MUSTAFABAD",
+        "MUSTAFABAD - DARAZPUR",
+        "DARAZPUR - JAGADHRI WORKSHOP",
+        "JAGADHRI WORKSHOP - YAMUNANAGAR JAGADHARI",
+        "YAMUNANAGAR JAGADHARI - KALANOUR",
+        "KALANOUR - SARSAWA",
+        "SARSAWA - PILKHANI",
+        "PILKHANI - SAHARANPUR",
+        "SAHARANPUR - TAPRI JN"
+      ]
+    }
+  };
+
+    var sec   = document.getElementById("sectionSelect");
+  var sub   = document.getElementById("subSectionInput");
+  var list  = document.getElementById("subSectionList");   // now a <ul>
+  var combo = document.getElementById("subCombo");
+  var line  = document.getElementById("lineInput");
+  var form  = document.getElementById("blockDemandForm");
+  var activeIdx = -1;
+
+  // fill the Section dropdown
+  Object.keys(SECTIONS).forEach(function (name) {
+    var o = document.createElement("option");
+    o.value = name;
+    o.textContent = name;
+    sec.appendChild(o);
+  });
+
+  // fill the Line dropdown + reverse map (line -> section)
+  var lineToSection = {};
+  Object.keys(SECTIONS).forEach(function (name) {
+    var ln = SECTIONS[name].line;
+    lineToSection[ln] = name;
+    var o = document.createElement("option");
+    o.value = ln;
+    o.textContent = ln;
+    line.appendChild(o);
+  });
+  function currentSubs() {
+    var s = SECTIONS[sec.value];
+    return s ? s.subs : [];
+  }
+
+  // draw the list (filtered by typed text) and open it
+  function openList(filterText) {
+    if (sub.disabled) return;
+    var q = (filterText || "").trim().toUpperCase();
+    var items = currentSubs().filter(function (x) {
+      return !q || x.toUpperCase().indexOf(q) !== -1;
+    });
+    list.innerHTML = "";
+    activeIdx = -1;
+    if (!items.length) {
+      var none = document.createElement("li");
+      none.className = "empty";
+      none.textContent = "No matching sub section";
+      list.appendChild(none);
+    }
+    items.forEach(function (name) {
+      var li = document.createElement("li");
+      li.textContent = name;
+      li.addEventListener("mousedown", function (ev) {
+        ev.preventDefault();          // keep focus in the input
+        pick(name);
+      });
+      list.appendChild(li);
+    });
+    combo.classList.add("open");
+  }
+
+  function closeList() { combo.classList.remove("open"); }
+
+  function pick(name) {
+    sub.value = name;
+    sub.dispatchEvent(new Event("input", { bubbles: true }));
+    sub.dispatchEvent(new Event("change", { bubbles: true }));
+    closeList();
+  }
+
+  list.addEventListener("mousedown", function (e) { e.preventDefault(); }); // scrollbar click keeps list open
+  sub.addEventListener("click", function () { openList(""); });
+  sub.addEventListener("input", function () { openList(sub.value); });
+  sub.addEventListener("blur", closeList);
+
+  // keyboard: Up / Down / Enter / Esc
+  sub.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { closeList(); return; }
+    if (e.key !== "ArrowDown" && e.key !== "ArrowUp" && e.key !== "Enter") return;
+    if (!combo.classList.contains("open")) {
+      if (e.key === "Enter") return;
+      e.preventDefault();
+      openList("");
+    }
+    var lis = list.querySelectorAll("li:not(.empty)");
+    if (e.key === "Enter") {
+      if (activeIdx >= 0 && lis[activeIdx]) { e.preventDefault(); pick(lis[activeIdx].textContent); }
+      return;
+    }
+    e.preventDefault();
+    if (!lis.length) return;
+    activeIdx = e.key === "ArrowDown" ? Math.min(activeIdx + 1, lis.length - 1)
+                                      : Math.max(activeIdx - 1, 0);
+    lis.forEach(function (li, i) { li.classList.toggle("active", i === activeIdx); });
+    lis[activeIdx].scrollIntoView({ block: "nearest" });
+  });
+
+  // section chosen -> reset sub section, assign + lock line
+  function onSectionChange() {
+    var s = SECTIONS[sec.value];
+    sub.value = "";
+    closeList();
+    list.innerHTML = "";
+    if (!s) {
+      sub.disabled = true;
+      sub.placeholder = "Select Section first";
+      line.value = "";
+      return;
+    }
+    sub.disabled = false;
+    sub.placeholder = "Type or select sub section";
+    line.value = s.line;
+  }
+  sec.addEventListener("change", onSectionChange);
+  
+  // Line chosen first -> select its Station (section) automatically
+  line.addEventListener("change", function () {
+    sec.value = lineToSection[line.value] || "";
+    onSectionChange();
+  });
+
+  // typed value must match a sub section of the chosen section
+  sub.addEventListener("change", function () {
+    var s = SECTIONS[sec.value];
+    if (!s || !sub.value.trim()) return;
+    var typed = sub.value.trim().toUpperCase();
+    var match = s.subs.filter(function (x) { return x.toUpperCase() === typed; })[0];
+    if (match) { sub.value = match; }
+    else { alert("Please pick a valid sub section from the list."); sub.value = ""; }
+  });
+
+  // Clear button / form.reset() puts everything back
+  form.addEventListener("reset", function () { setTimeout(onSectionChange, 0); });
+
+  onSectionChange();
+
+})();
+</script>
+<script>
+(function () {
+  var BASE = window.location.hostname.endsWith("github.io")
+    ? "https://william-warren-plastics-removed.trycloudflare.com"
+    : (window.location.port === "8000" ? "" : "http://127.0.0.1:8000");
+  var TOKEN = sessionStorage.getItem("marg_access_token");
+
+  var form = document.getElementById("blockDemandForm");
+  var saveBtn = form.querySelectorAll(".btn-action")[0];
+
+  // [field name, label shown in the error message]
+  var REQUIRED = [
+    ["station", "Station"], ["sub_section", "Sub Section"],
+    ["direction", "Direction"], ["line", "Line"],
+    ["km_from", "Location From (KM)"], ["meter_from", "Location From (Meter)"],
+    ["km_to", "Location To (KM)"], ["meter_to", "Location To (Meter)"],
+    ["machine", "Machine"], ["dept", "Dept"],
+    ["demanded_for", "Demanded For"],
+    ["demanded_from", "Demanded From"], ["demanded_to", "Demanded To"],
+    ["duration", "Duration"], ["min_duration", "Minimum Duration"],
+    ["quantum_of_work", "Quantum of work"],
+    ["resource_required", "Resource Required"], ["remarks", "Remarks"]
+  ];
+
+  function field(name) { return form.elements[name]; }
+
+  saveBtn.addEventListener("click", async function () {
+    // 1. every field must be filled
+    var missing = [];
+    REQUIRED.forEach(function (r) {
+      var el = field(r[0]);
+      var empty = !el || el.value.trim() === "";
+      if (el) el.style.borderColor = empty ? "#d93025" : "";
+      if (empty) missing.push(r[1]);
+    });
+    if (missing.length) {
+      alert("Please fill all fields before saving.\n\nMissing: " + missing.join(", "));
+      return;
+    }
+
+    // 2. build the data
+    var payload = {};
+    REQUIRED.forEach(function (r) { payload[r[0]] = field(r[0]).value.trim(); });
+    ["km_from", "meter_from", "km_to", "meter_to"].forEach(function (k) {
+      payload[k] = parseInt(payload[k], 10);
+    });
+
+    if (!TOKEN) { window.location.replace("../index.html"); return; }
+
+    // 3. send it
+    saveBtn.disabled = true;
+    try {
+      var res = await fetch(BASE + "/api/block-requests", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + TOKEN
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (res.status === 401) { window.location.replace("../index.html"); return; }
+
+      if (!res.ok) {
+        var err = await res.json().catch(function () { return null; });
+        var msg = "Could not save.";
+        if (err && typeof err.detail === "string") msg = err.detail;
+        else if (err && Array.isArray(err.detail) && err.detail[0]) {
+          msg = err.detail[0].msg.replace(/^Value error, /, "");
+        }
+        alert(msg);
+        return;
+      }
+
+      alert("Block demand saved successfully.");
+      window.location.reload();   // clears the form and reloads the table
+    } catch (e) {
+      alert("Cannot reach the server. Please try again.");
+    } finally {
+      saveBtn.disabled = false;
+    }
+  });
 })();
 </script>
 <script src="../header-tools.js"></script>

@@ -15,6 +15,6 @@ def list_block_requests(
     user: User = Depends(current_user),
 ):
     rows = db.execute(
-        text("SELECT * FROM public.block_requests ORDER BY sr_no")
+        text("SELECT * FROM public.block_requests ORDER BY sr_no DESC")
     ).mappings().all()
     return [dict(r) for r in rows]
