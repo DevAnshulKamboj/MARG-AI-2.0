@@ -1,0 +1,22 @@
+Version: 2.0
+
+Goal:
+  name: Block Priority Criteria
+  preferences:
+    pairwise:
+      - [Safety, Urgency, 2]
+      - [Safety, Operational, 2]
+      - [Safety, Deadline, 3]
+      - [Safety, Duration, 5]
+      - [Urgency, Operational, 1]
+      - [Urgency, Deadline, 2]
+      - [Urgency, Duration, 4]
+      - [Operational, Deadline, 2]
+      - [Operational, Duration, 4]
+      - [Deadline, Duration, 3]
+  children:
+    Safety:
+    Urgency:
+    Operational:
+    Deadline:
+    Duration:

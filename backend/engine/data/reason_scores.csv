@@ -1,0 +1,16 @@
+department,reason,safety,urgency,operational,typical_deadline,typical_duration
+S&T,Repair of relay wire,8,8,8,7,4
+S&T,Faulty signal replacement,9,8,9,8,5
+S&T,Junction box repair,6,5,6,5,3
+S&T,Axle counter repair,9,8,8,7,4
+S&T,Relay wire inspection,6,4,5,4,3
+Engineering,Track inspection,7,5,6,5,3
+Engineering,Track alignment correction,8,7,8,7,6
+Engineering,Rail replacement,9,8,9,8,7
+Engineering,Weld repair or rail welding,9,8,8,8,5
+Engineering,Tamping and track packing,7,5,7,5,7
+Electrical,OHE inspection,7,5,6,5,4
+Electrical,OHE wire replacement,9,8,9,8,7
+Electrical,OHE tensioning equipment maintenance,8,6,7,6,6
+Electrical,OHE mast or structure repair,9,7,8,7,7
+Electrical,OHE registration adjustment,7,5,7,5,4
