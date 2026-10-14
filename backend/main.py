@@ -15,14 +15,14 @@ from engine_routes import router as engine_router
 Base.metadata.create_all(bind=engine)
 
 
-app = FastAPI(docs_url="/docs", openapi_url="/openapi.json")
+#app = FastAPI(docs_url="/docs", openapi_url="/openapi.json")
 
-# app = FastAPI(
-#     title="Login API",
-#     docs_url=None,
-#     redoc_url=None,
-#     openapi_url=None
-# )
+app = FastAPI(
+     title="Login API",
+     docs_url=None,
+     redoc_url=None,
+     openapi_url=None
+ )
 
 @app.middleware("http")
 async def no_cache(request, call_next):
