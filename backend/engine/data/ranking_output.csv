@@ -3,16 +3,17 @@
 1,"NR-BLK-2026-015","S&T","Faulty Signal replacement",9,8,9,-1,9,0.166666666666667,9,0.9479
 3,"NR-BLK-2026-002","S&T","Faulty signal replacement",9,8,9,0,9,1.5,8.5,0.9474
 4,"NR-BLK-2026-003","Elec","OHE wire replacement",9,8,9,1,9,2.5,7.5,0.9443
-5,"NR-BLK-2026-009","S&T","Axle counter repair",9,8,8,0,9,2,8,0.9251
-6,"NR-BLK-2026-001","Civil","Rail replacement",9,8,9,4,7.5,4,6,0.9212
-7,"NR-BLK-2026-006","Civil","Weld repair or rail welding",9,8,8,6,6.5,3,7,0.8928
-8,"NR-BLK-2026-010","Civil","Rail replacement",9,8,9,8,5.625,2.5,7.5,0.8884
-9,"NR-BLK-2026-017","S&T","Faulty Signal replacement",9,8,9,0,9,337.033333333333,1,0.8878
-9,"NR-BLK-2026-016","Engineering","Rail replacement",9,8,9,1,9,169.016666666667,1,0.8878
-11,"NR-BLK-2026-005","Elec","OHE mast or structure repair",9,7,8,2,8.5,1.5,8.5,0.8846
-12,"NR-BLK-2026-013","S&T","Repair of relay wire",8,8,8,-1,9,0.166666666666667,9,0.8804
-13,"NR-BLK-2026-007","Elec","OHE wire replacement",9,8,9,25,1.66666666666667,4,6,0.7981
-14,"NR-BLK-2026-011","S&T","Repair of relay wire",8,8,8,16,2.86666666666667,1,9,0.7903
-15,"NR-BLK-2026-012","Engineering","Track alignment correction",8,7,8,13,3.75,1,9,0.7882
-16,"NR-BLK-2026-004","Civil","Tamping and track packing",7,5,7,11,4.5,4,6,0.6723
-17,"NR-BLK-2026-008","Civil","Tamping and track packing",7,5,7,18,2.6,4,6,0.6519
+5,"NR-BLK-2026-018","S&T","Axle counter repair",9,8,8,0,9,1,9,0.9263
+6,"NR-BLK-2026-009","S&T","Axle counter repair",9,8,8,0,9,2,8,0.9251
+7,"NR-BLK-2026-001","Civil","Rail replacement",9,8,9,4,7.5,4,6,0.9212
+8,"NR-BLK-2026-006","Civil","Weld repair or rail welding",9,8,8,6,6.5,3,7,0.8928
+9,"NR-BLK-2026-010","Civil","Rail replacement",9,8,9,8,5.625,2.5,7.5,0.8884
+10,"NR-BLK-2026-017","S&T","Faulty Signal replacement",9,8,9,0,9,337.033333333333,1,0.8878
+10,"NR-BLK-2026-016","Engineering","Rail replacement",9,8,9,1,9,169.016666666667,1,0.8878
+12,"NR-BLK-2026-005","Elec","OHE mast or structure repair",9,7,8,2,8.5,1.5,8.5,0.8846
+13,"NR-BLK-2026-013","S&T","Repair of relay wire",8,8,8,-1,9,0.166666666666667,9,0.8804
+14,"NR-BLK-2026-007","Elec","OHE wire replacement",9,8,9,25,1.66666666666667,4,6,0.7981
+15,"NR-BLK-2026-011","S&T","Repair of relay wire",8,8,8,16,2.86666666666667,1,9,0.7903
+16,"NR-BLK-2026-012","Engineering","Track alignment correction",8,7,8,13,3.75,1,9,0.7882
+17,"NR-BLK-2026-004","Civil","Tamping and track packing",7,5,7,11,4.5,4,6,0.6723
+18,"NR-BLK-2026-008","Civil","Tamping and track packing",7,5,7,18,2.6,4,6,0.6519
