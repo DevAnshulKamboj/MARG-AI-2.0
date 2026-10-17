@@ -4,7 +4,7 @@ from .database import Base
 
 
 class User(Base):
-    __tablename__ = "users"
+    __tablename__ = "login-credentials"
 
     id = Column(Integer, primary_key=True)
     email = Column(String(255), unique=True, index=True, nullable=False)
