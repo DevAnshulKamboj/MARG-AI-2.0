@@ -16,7 +16,7 @@ router = APIRouter(prefix="/engine", tags=["engine"])
 db = create_engine(os.getenv("DATABASE_URL"))
 
 BASE = Path(__file__).parent
-R_SCRIPT = BASE / "engine" / "priority_engine.R"
+R_SCRIPT = BASE / "priority_engine" / "priority_engine.R"
 OUT_DIR = BASE / "output"
 OUT_DIR.mkdir(exist_ok=True)
 
@@ -36,7 +36,7 @@ def execute_engine(run_id: int):
             capture_output=True,
             text=True,
             timeout=600,
-            cwd=str(BASE / "engine"),
+            cwd=str(BASE / "priority_engine"),
         )
         if proc.returncode != 0:
             raise RuntimeError("R failed: " + proc.stderr[-500:])
