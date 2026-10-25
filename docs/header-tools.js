@@ -17,7 +17,7 @@
   // Where the report form is sent (the backend endpoint must exist)
   var REPORT_PATH = "/api/reports";
   var BASE = window.location.hostname.endsWith("github.io")
-    ? "https://compression-command-slim-pct.trycloudflare.com"
+    ? "https://api.trycloudflare.com"
     : (window.location.port === "8000" ? "" : "http://127.0.0.1:8000");
   var TOKEN_KEY = "marg_access_token";
   // ==========================================================
