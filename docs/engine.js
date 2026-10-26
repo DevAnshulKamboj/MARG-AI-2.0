@@ -3,7 +3,7 @@
 // Otherwise (GitHub Pages) call the tunnel.
 const IS_LOCAL_SERVER =
   ["127.0.0.1", "localhost"].includes(location.hostname) && location.port === "8000";
-const API = IS_LOCAL_SERVER ? "" : "https://api.trycloudflare.com";
+const API = IS_LOCAL_SERVER ? "" : "https://hostels-restore-polyester-carolina.trycloudflare.com";
 
 const HEADERS = { "x-api-key": "marg-test-key-123" };   // must match ENGINE_API_KEY in .env
 
