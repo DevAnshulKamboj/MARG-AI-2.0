@@ -1,18 +1,19 @@
 "rank","request_id","department","reason","safety","urgency","operational","days_left","deadline","duration_hrs","duration","closeness"
-1,"NR-BLK-2026-014","S&T","Faulty Signal replacement",9,8,9,-8,9,0.166666666666667,9,0.9479
-1,"NR-BLK-2026-015","S&T","Faulty Signal replacement",9,8,9,-8,9,0.166666666666667,9,0.9479
-3,"NR-BLK-2026-002","S&T","Faulty signal replacement",9,8,9,-7,9,1.5,8.5,0.9474
-4,"NR-BLK-2026-003","Elec","OHE wire replacement",9,8,9,-6,9,2.5,7.5,0.9443
-4,"NR-BLK-2026-010","Civil","Rail replacement",9,8,9,1,9,2.5,7.5,0.9443
-6,"NR-BLK-2026-001","Civil","Rail replacement",9,8,9,-3,9,4,6,0.9349
-7,"NR-BLK-2026-018","S&T","Axle counter repair",9,8,8,-7,9,1,9,0.9263
-8,"NR-BLK-2026-009","S&T","Axle counter repair",9,8,8,-7,9,2,8,0.9251
-9,"NR-BLK-2026-006","Civil","Weld repair or rail welding",9,8,8,-1,9,3,7,0.9217
-10,"NR-BLK-2026-005","Elec","OHE mast or structure repair",9,7,8,-5,9,1.5,8.5,0.8859
-11,"NR-BLK-2026-013","S&T","Repair of relay wire",8,8,8,-8,9,0.166666666666667,9,0.8804
-12,"NR-BLK-2026-011","S&T","Repair of relay wire",8,8,8,9,5.25,1,9,0.8367
-13,"NR-BLK-2026-012","Engineering","Track alignment correction",8,7,8,6,6.5,1,9,0.8317
-14,"NR-BLK-2026-007","Elec","OHE wire replacement",9,8,9,18,2.6,4,6,0.8175
-15,"NR-BLK-2026-004","Civil","Tamping and track packing",7,5,7,4,7.5,4,6,0.6966
-16,"NR-BLK-2026-008","Civil","Tamping and track packing",7,5,7,11,4.5,4,6,0.6723
-17,"NR-BLK-2026-019","S&T","Junction box repair",6,5,6,0,9,1,9,0.6227
+1,"NR-BLK-2026-014","S&T","Faulty Signal replacement",9,8,9,-16,9,0.166666666666667,9,0.9479
+1,"NR-BLK-2026-015","S&T","Faulty Signal replacement",9,8,9,-16,9,0.166666666666667,9,0.9479
+1,"NR-BLK-2026-020","Engineering","Rail replacement",9,8,9,1,9,1,9,0.9479
+4,"NR-BLK-2026-002","S&T","Faulty signal replacement",9,8,9,-15,9,1.5,8.5,0.9474
+5,"NR-BLK-2026-003","Elec","OHE wire replacement",9,8,9,-14,9,2.5,7.5,0.9443
+5,"NR-BLK-2026-010","Civil","Rail replacement",9,8,9,-7,9,2.5,7.5,0.9443
+7,"NR-BLK-2026-001","Civil","Rail replacement",9,8,9,-11,9,4,6,0.9349
+8,"NR-BLK-2026-018","S&T","Axle counter repair",9,8,8,-15,9,1,9,0.9263
+9,"NR-BLK-2026-009","S&T","Axle counter repair",9,8,8,-15,9,2,8,0.9251
+10,"NR-BLK-2026-006","Civil","Weld repair or rail welding",9,8,8,-9,9,3,7,0.9217
+11,"NR-BLK-2026-005","Elec","OHE mast or structure repair",9,7,8,-13,9,1.5,8.5,0.8859
+12,"NR-BLK-2026-011","S&T","Repair of relay wire",8,8,8,1,9,1,9,0.8804
+12,"NR-BLK-2026-013","S&T","Repair of relay wire",8,8,8,-16,9,0.166666666666667,9,0.8804
+14,"NR-BLK-2026-007","Elec","OHE wire replacement",9,8,9,10,4.875,4,6,0.8673
+15,"NR-BLK-2026-012","Engineering","Track alignment correction",8,7,8,-2,9,1,9,0.8502
+16,"NR-BLK-2026-004","Civil","Tamping and track packing",7,5,7,-4,9,4,6,0.7033
+17,"NR-BLK-2026-008","Civil","Tamping and track packing",7,5,7,3,8,4,6,0.6993
+18,"NR-BLK-2026-019","S&T","Junction box repair",6,5,6,-8,9,1,9,0.6227
