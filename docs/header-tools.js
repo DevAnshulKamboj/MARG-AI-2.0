@@ -18,10 +18,10 @@
   var REPORT_PATH = "/api/reports";
   var BASE = window.location.hostname.endsWith("github.io")
 <<<<<<< HEAD
-    ? "https://grande-mood-bundle-grown.trycloudflare.com"
+    ? "https://crown-latex-numerous-romance.trycloudflare.com"
     : (window.location.port === "8000" ? "" : "http://127.0.0.1:8001");
 =======
-    ? "https://grande-mood-bundle-grown.trycloudflare.com"
+    ? "https://crown-latex-numerous-romance.trycloudflare.com"
     : (window.location.port === "8000" ? "" : "http://127.0.0.1:8000");
 >>>>>>> 85f6f14ed98e4779bffa28329a700da5efe31301
   var TOKEN_KEY = "marg_access_token";
