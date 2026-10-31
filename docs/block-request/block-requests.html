@@ -322,8 +322,8 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
                     <label>Direction</label>
                     <select name="direction" id="directionSelect">
                         <option value="">Select Direction</option>
-                        <option value="Up">Up</option>
-                        <option value="Down">Down</option>
+                        <option value="UP">UP</option>
+                        <option value="DOWN">DOWN</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -518,7 +518,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
 (function () {
   var BASE = window.location.hostname.endsWith("github.io")
     ? "https://iii-delivering-merchants-lunch.trycloudflare.com"
-    : (window.location.port === "8000" ? "" : "http://127.0.0.1:8000");
+    : (window.location.port === "8000" ? "" : "http://127.0.0.1:8001");
   var TOKEN = sessionStorage.getItem("marg_access_token");
 
   var COLUMNS = [
@@ -759,56 +759,23 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
 (function () {
   // ---- DATA: section -> line + sub sections ----
   var SECTIONS = {
-    "AMBALA CANTT - CHANDIGARH": {
-      line: "LINE 1",
+    "LUDHIANA - SAHARANPUR": {
+      // Line 1 = UP, Line 2 = DOWN (linked both ways)
+      lines: { "LINE 1": "UP", "LINE 2": "DOWN" },
+      // Chainage runs from Ludhiana (0 km) to Saharanpur (194 km 597 m)
+      maxKm: 194,
+      maxM: 597,
       subs: [
-        "AMBALA CANT JN - DHULKOT",
-        "DHULKOT - LALRU",
-        "LALRU - DAPPAR",
-        "DAPPAR - CHANDIGARH"
-      ]
-    },
-    "RAJPURA JN - MOHANPURA": {
-      line: "LINE 2",
-      subs: [
-        "RAJPURA JN - DAUN KALAN",
-        "DAUN KALAN - PATIALA",
-        "PATIALA - PATIALA CANTT.",
-        "PATIALA CANTT. - DHABLAN",
-        "DHABLAN - NABHA",
-        "NABHA - KAKRALA",
-        "KAKRALA - KAULSERI",
-        "KAULSERI - DHURI JN",
-        "DHURI JN - ALAL",
-        "ALAL - SEKHA",
-        "SEKHA - BARNALA",
-        "BARNALA - HADIAYA",
-        "HADIAYA - TAPA",
-        "TAPA - JETHUKE",
-        "JETHUKE - RAMPURA PHUL",
-        "RAMPURA PHUL - LEHRA MUHABBAT",
-        "LEHRA MUHABBAT - BHUCHUCHU",
-        "BHUCHUCHU - BHATINDA CANTT",
-        "BHATINDA CANTT - BAHMAN DIWANA",
-        "BAHMAN DIWANA - BULLUANA",
-        "BULLUANA - GIDDARBAHA",
-        "GIDDARBAHA - FAQARSAR",
-        "FAQARSAR - MALOUT",
-        "MALOUT - PAKKI",
-        "PAKKI - PAKKI",
-        "BAHAWAL BASI - BAHAWAL BASI",
-        "ABOHAR - KILANWALI PUNJAB",
-        "KILANWALI PUNJAB - PANJU KOSI",
-        "PANJU KOSI - BAKAYANWALA",
-        "BAKAYANWALA - KOTHA PAKKI",
-        "KOTHA PAKKI - HINDUMALKOTE",
-        "HINDUMALKOTE - FATUHI",
-        "FATUHI - MOHANPURA"
-      ]
-    },
-    "AMBALA CANT JN - SAHARANPUR": {
-      line: "LINE 3",
-      subs: [
+        "LUDHIANA JN - SANAHWAL",
+        "SANAHWAL - CHAWAPALL",
+        "CHAWAPALL - KHANNA",
+        "KHANNA - GOVINDGARH",
+        "GOVINDGARH - SIRHIND JN",
+        "SIRHIND JN - SADHOO GARH",
+        "SADHOO GARH - SARAI BANJARA",
+        "SARAI BANJARA - RAJPURA JN",
+        "RAJPURA JN - AMBALA CITY",
+        "AMBALA CITY - AMBALA CANT JN",
         "AMBALA CANT JN - DUKHERI",
         "DUKHERI - KESRI",
         "KESRI - TANDWAL",
@@ -820,8 +787,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
         "YAMUNANAGAR JAGADHARI - KALANOUR",
         "KALANOUR - SARSAWA",
         "SARSAWA - PILKHANI",
-        "PILKHANI - SAHARANPUR",
-        "SAHARANPUR - TAPRI JN"
+        "PILKHANI - SAHARANPUR"
       ]
     }
   };
@@ -842,16 +808,23 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
     sec.appendChild(o);
   });
 
-  // fill the Line dropdown + reverse map (line -> section)
+  // fill the Line dropdown (LINE 1 / LINE 2) + maps
   var lineToSection = {};
+  var lineToDir = {};
+  var dirToLine = {};
   Object.keys(SECTIONS).forEach(function (name) {
-    var ln = SECTIONS[name].line;
-    lineToSection[ln] = name;
-    var o = document.createElement("option");
-    o.value = ln;
-    o.textContent = ln;
-    line.appendChild(o);
+    var L = SECTIONS[name].lines;
+    Object.keys(L).forEach(function (ln) {
+      lineToSection[ln] = name;
+      lineToDir[ln] = L[ln];
+      dirToLine[L[ln]] = ln;
+      var o = document.createElement("option");
+      o.value = ln;
+      o.textContent = ln;
+      line.appendChild(o);
+    });
   });
+  var dirSel = document.getElementById("directionSelect");
   function currentSubs() {
     var s = SECTIONS[sec.value];
     return s ? s.subs : [];
@@ -929,19 +902,58 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
     if (!s) {
       sub.disabled = true;
       sub.placeholder = "Select Section first";
-      line.value = "";
       return;
     }
     sub.disabled = false;
     sub.placeholder = "Type or select sub section";
-    line.value = s.line;
   }
   sec.addEventListener("change", onSectionChange);
   
-  // Line chosen first -> select its Station (section) automatically
+  // Line chosen -> select its Station (section) and Direction automatically
   line.addEventListener("change", function () {
-    sec.value = lineToSection[line.value] || "";
-    onSectionChange();
+    if (!line.value) { dirSel.value = ""; return; }
+    var wantSec = lineToSection[line.value] || "";
+    if (sec.value !== wantSec) { sec.value = wantSec; onSectionChange(); }
+    dirSel.value = lineToDir[line.value] || "";
+  });
+
+  // Direction chosen -> select the matching Line (and Station)
+  dirSel.addEventListener("change", function () {
+    if (!dirSel.value) { line.value = ""; return; }
+    line.value = dirToLine[dirSel.value] || "";
+    line.dispatchEvent(new Event("change", { bubbles: true }));
+  });
+
+  // ---- Location limit: not beyond the end of the section (194 km 597 m) ----
+  var locInputs = ["km_from", "meter_from", "km_to", "meter_to"].map(function (n) { return form.elements[n]; });
+  function checkLimit(el, quiet) {
+    var s = SECTIONS[sec.value] || SECTIONS[Object.keys(SECTIONS)[0]];
+    var pairs = [["km_from", "meter_from"], ["km_to", "meter_to"]];
+    for (var i = 0; i < pairs.length; i++) {
+      var kmEl = form.elements[pairs[i][0]], mEl = form.elements[pairs[i][1]];
+      var km = kmEl.value === "" ? null : Number(kmEl.value);
+      var m  = mEl.value === ""  ? null : Number(mEl.value);
+      var bad = null;
+      if (km !== null && (km < 0 || km > s.maxKm)) bad = kmEl;
+      else if (m !== null && (m < 0 || m > 999)) bad = mEl;
+      else if (km !== null && m !== null && km === s.maxKm && m > s.maxM) bad = mEl;
+      if (bad) {
+        if (!quiet) {
+          alert("Location cannot exceed " + s.maxKm + " KM and " + s.maxM + " M for this section.");
+          bad.value = "";
+        }
+        return false;
+      }
+    }
+    return true;
+  }
+  locInputs.forEach(function (el) {
+    el.min = 0;
+    el.addEventListener("change", function () { checkLimit(el, false); });
+  });
+  // run before the Save handler (registered later) and block it if invalid
+  form.querySelectorAll(".btn-action")[0].addEventListener("click", function (e) {
+    if (!checkLimit(null, false)) e.stopImmediatePropagation();
   });
 
   // typed value must match a sub section of the chosen section
@@ -965,7 +977,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
 (function () {
   var BASE = window.location.hostname.endsWith("github.io")
     ? "https://iii-delivering-merchants-lunch.trycloudflare.com"
-    : (window.location.port === "8000" ? "" : "http://127.0.0.1:8000");
+    : (window.location.port === "8000" ? "" : "http://127.0.0.1:8001");
   var TOKEN = sessionStorage.getItem("marg_access_token");
 
   var form = document.getElementById("blockDemandForm");

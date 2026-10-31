@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Scheduler | MARG AI</title>
-<title>Dashboard | MARG AI</title>
 <script src="../auth-guard.js"></script>
 <style>
 *{box-sizing:border-box}
@@ -26,8 +25,43 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
 .nav-bar{height:44px;flex:0 0 44px;display:flex;align-items:stretch;background:#eee;border-bottom:1px solid #7fa6d8}
 .nav-item{height:43px;display:flex;align-items:center;justify-content:center;padding:0 14px;border-left:1px solid #3f78bd;border-right:1px solid #3f78bd;border-top:1px solid #3f78bd;color:#111;font-size:21px;text-decoration:none;background:#eee}
 .nav-item:hover,.nav-item.active{background:#e5eaf0}
-.content{flex:1 1 auto;min-height:0;background:#eee}
+.content{flex:1 1 auto;min-height:0;background:#eee;overflow:auto;padding:12px 16px 16px}
 .footer{height:20px;flex:0 0 20px;display:flex;align-items:center;justify-content:space-between;padding:0 8px;background:#eee;border-top:1px solid #9bb9dc;color:#31517e;font-size:8px;font-weight:700;letter-spacing:.2px}
+
+/* ---- Scheduler tab ---- */
+.hidden{display:none!important}
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:10px}
+.toolbar label{font-size:14px;font-weight:700;color:#263e69}
+.toolbar input[type=date]{height:32px;padding:0 8px;font-size:14px;border:1px solid #8eafd6;border-radius:3px;background:#fff}
+.btn{height:32px;padding:0 14px;font-size:14px;font-weight:700;color:#263e69;background:#fff;border:1px solid #3f78bd;border-radius:3px;cursor:pointer}
+.btn:hover:not(:disabled){background:#e5eaf0}
+.btn.primary{color:#fff;background:#3f78bd}
+.btn.primary:hover:not(:disabled){background:#31609a}
+.btn:disabled,.toolbar input:disabled{opacity:.55;cursor:not-allowed}
+.muted{font-size:12px;color:#555}
+.progress{margin:6px 0 10px;max-width:640px}
+.bar{height:8px;background:#d5dfee;border-radius:4px;overflow:hidden}
+#barFill{height:100%;width:0;background:#3f78bd;transition:width .4s}
+#progressText{margin-top:4px;font-size:13px;color:#263e69}
+.notice{margin:6px 0 10px;padding:8px 12px;font-size:13px;border-radius:3px;border:1px solid;max-width:980px}
+.notice.ok{background:#e8f4ea;border-color:#8cc59a;color:#1f5a2c}
+.notice.warn{background:#fff6dd;border-color:#e3c46b;color:#6b5200}
+.notice.error{background:#fdeaea;border-color:#e09a9a;color:#8a1f1f}
+.notice ul{margin:6px 0 0;padding-left:18px;max-height:160px;overflow:auto}
+.summary{margin:2px 0 12px;padding:8px 12px;font-size:13px;background:#f5f5f5;border:1px solid #8eafd6;border-radius:3px;color:#263e69}
+h3.sec{margin:14px 0 6px;font-size:16px;color:#263e69}
+.tablewrap{overflow-x:auto;background:#fff;border:1px solid #8eafd6}
+table.grid{border-collapse:collapse;width:100%;font-size:13px}
+table.grid th{background:#dfe8f5;color:#263e69;text-align:left;padding:6px 8px;border-bottom:1px solid #8eafd6;white-space:nowrap}
+table.grid td{padding:5px 8px;border-bottom:1px solid #e3e9f2;white-space:nowrap;vertical-align:top}
+table.grid td.wrap{white-space:normal;min-width:260px}
+table.grid tr.grp-start td{border-top:2px solid #8eafd6}
+table.grid tr.shade td{background:#f6f9fd}
+table.grid td.cont{color:transparent;user-select:none}
+.badge{display:inline-block;padding:1px 8px;border-radius:9px;font-size:11px;font-weight:700}
+.badge.rej{background:#fdeaea;color:#8a1f1f}
+.badge.nosel{background:#fff6dd;color:#6b5200}
+.empty{margin:14px 0;font-size:14px;color:#555}
 </style>
 </head>
 <body>
@@ -54,15 +88,49 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
 <a class="nav-item" href="../dashboard/dashboard.html">Dashboard</a>
 <a class="nav-item" href="../block-request/block-requests.html">Block Requests</a>
 <a class="nav-item" href="../priority-list/priority-list.html">Priority List</a>
-<a class="nav-item" href="../scheduler/scheduler.html">Scheduler</a>
+<a class="nav-item active" href="../scheduler/scheduler.html">Scheduler</a>
 <a class="nav-item" href="../live-tracker/live-tracker.html">Live Tracker</a>
 <a class="nav-item" href="../live-map/live-map.html">Live Map</a>
 </nav>
 <main class="content">
-<h2 class="page-title">Under Development</h2>
-<p class="page-text">Scheduling Engine requires real train movement data to schedule block request in co-ordination with train movement</p>
-<p class="page-text">Our back-end team is manually importing this data from "Where is my Train" app, for Sarahanpur to Ludhiana Line (Both Up and Down). This may take few days</p>
-<p class="page-text"></p>
+<div class="toolbar">
+<label for="schedDate">Block date</label>
+<input type="date" id="schedDate">
+<button type="button" class="btn" id="priorityBtn">Run Priority Engine</button>
+<button type="button" class="btn primary" id="generateBtn">Generate Schedule</button>
+<span class="muted" id="priorityInfo"></span>
+</div>
+
+<div class="progress hidden" id="progressBox">
+<div class="bar"><div id="barFill"></div></div>
+<div id="progressText"></div>
+</div>
+
+<div class="notice hidden" id="notice"></div>
+<div class="summary hidden" id="summary"></div>
+
+<h3 class="sec hidden" id="grantedTitle">Blocks granted</h3>
+<div class="tablewrap hidden" id="grantedWrap">
+<table class="grid" id="grantedTable">
+<thead><tr>
+<th>Block</th><th>Km</th><th>Block time</th><th>Request</th><th>Dept</th><th>Reason for block</th>
+<th>Score</th><th>Asked from</th><th>Work slot</th><th>Delay</th>
+</tr></thead>
+<tbody id="grantedBody"></tbody>
+</table>
+</div>
+
+<h3 class="sec hidden" id="noBlockTitle">Requests without a block</h3>
+<div class="tablewrap hidden" id="noBlockWrap">
+<table class="grid" id="noBlockTable">
+<thead><tr>
+<th>Request</th><th>Dept</th><th>Reason for block</th><th>Score</th><th>Asked from</th><th>Result</th><th>Why</th>
+</tr></thead>
+<tbody id="noBlockBody"></tbody>
+</table>
+</div>
+
+<p class="empty hidden" id="emptyMsg"></p>
 </main>
 <footer class="footer">
 <span>SYNAPTEK</span>
@@ -71,5 +139,315 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helv
 </div>
 <script src="../header-tools.js"></script>
 <script src="../logout.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  // Same address rule as script.js (kept inside this function so it cannot clash with other scripts).
+  // On github.io the tunnel address below must be the current one; tunnel_bot.py rewrites it on restart.
+  const API_BASE = window.location.hostname.endsWith("github.io")
+    ? "https://fallen-rca-twelve-surgery.trycloudflare.com"
+    : (window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost")
+        ? ((window.location.port === "8000" || window.location.port === "8001") ? "" : "http://127.0.0.1:8001")
+        : "";
+  const TOKEN_KEY = "marg_access_token";
+
+  const $ = function (id) { return document.getElementById(id); };
+  let currentRun = null;        // the saved run shown for the chosen date, or null
+  let busy = false;
+
+  // ---------------------------------------------------------------- helpers ----
+  function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+  function tomorrow() {
+    const d = new Date();
+    d.setDate(d.getDate() + 1);
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  }
+
+  function hm(s) { return s ? String(s).slice(11, 16) : "-"; }          // "2026-11-02T07:00:00" -> "07:00"
+  function num(x) { return x === null || x === undefined ? "-" : String(Number(x)); }
+  function score(x) { return x === null || x === undefined ? "-" : Number(x).toFixed(3); }
+
+  function fmtDateTime(s) {
+    if (!s) return "-";
+    const d = new Date(s);
+    if (isNaN(d.getTime())) return String(s);
+    return d.toLocaleString("en-IN", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", hour12: false });
+  }
+
+  function fmtDate(iso) {
+    const d = new Date(iso + "T00:00:00");
+    return isNaN(d.getTime()) ? iso : d.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+  }
+
+  function el(tag, text, cls) {
+    const e = document.createElement(tag);
+    if (text !== undefined && text !== null) e.textContent = text;     // textContent: request text can never run as HTML
+    if (cls) e.className = cls;
+    return e;
+  }
+
+  function detail(data) {
+    if (data && typeof data.detail === "string") return data.detail;
+    if (data && Array.isArray(data.detail) && data.detail.length) return String(data.detail[0].msg || "").replace(/^Value error, /, "");
+    return "";
+  }
+
+  async function api(path, opts) {
+    opts = opts || {};
+    let res;
+    try {
+      res = await fetch(API_BASE + "/api/scheduler" + path, {
+        method: opts.method || "GET",
+        headers: Object.assign({ "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_KEY) },
+                               opts.body ? { "Content-Type": "application/json" } : {}),
+        body: opts.body ? JSON.stringify(opts.body) : undefined
+      });
+    } catch (e) {
+      throw new Error("Cannot reach the server. Please try again.");
+    }
+    if (res.status === 401) {
+      sessionStorage.removeItem(TOKEN_KEY);
+      window.location.replace("../index.html");
+      throw new Error("Please log in again.");
+    }
+    const data = await res.json().catch(function () { return null; });
+    if (!res.ok) {
+      const err = new Error(detail(data) || ("Request failed (" + res.status + ")"));
+      err.status = res.status;
+      throw err;
+    }
+    return data;
+  }
+
+  // ------------------------------------------------------------ screen bits ----
+  function setBusy(on) {
+    busy = on;
+    $("priorityBtn").disabled = on;
+    $("generateBtn").disabled = on;
+    $("schedDate").disabled = on;
+  }
+
+  function showNotice(text, kind, list) {
+    const box = $("notice");
+    box.textContent = "";
+    if (!text) { box.classList.add("hidden"); return; }
+    box.className = "notice " + (kind || "ok");
+    box.appendChild(document.createTextNode(text));
+    if (list && list.length) {
+      const ul = el("ul");
+      list.forEach(function (p) { ul.appendChild(el("li", p)); });
+      box.appendChild(ul);
+    }
+  }
+
+  function showProgress(text, fraction) {
+    $("progressBox").classList.remove("hidden");
+    $("progressText").textContent = text;
+    $("barFill").style.width = (fraction === null || fraction === undefined ? 5 : Math.max(5, Math.round(fraction * 100))) + "%";
+  }
+
+  function hideProgress() { $("progressBox").classList.add("hidden"); }
+
+  // ----------------------------------------------------------------- table ----
+  function render(data) {
+    const run = data.run;
+    const rows = data.rows || [];
+    const granted = rows.filter(function (r) { return r.status === "GRANTED"; });
+    const others = rows.filter(function (r) { return r.status !== "GRANTED"; });
+    const date = $("schedDate").value;
+
+    ["summary", "grantedTitle", "grantedWrap", "noBlockTitle", "noBlockWrap", "emptyMsg"].forEach(function (id) {
+      $(id).classList.add("hidden");
+    });
+    $("grantedBody").textContent = "";
+    $("noBlockBody").textContent = "";
+
+    if (!run) {
+      $("emptyMsg").textContent = "No schedule has been saved for " + fmtDate(date) + " yet. Click Generate Schedule.";
+      $("emptyMsg").classList.remove("hidden");
+      return;
+    }
+
+    $("summary").textContent =
+      "Saved " + fmtDateTime(run.finished_at) + "  |  " + run.n_granted + " of " + run.n_requests +
+      " requests granted in " + run.n_blocks + " blocks  |  " + (run.total_block_minutes / 60).toFixed(2) +
+      " block hours  |  " + run.n_rejected + " rejected, " + run.n_not_granted + " not selected  |  priority run " +
+      run.priority_run_id;
+    $("summary").classList.remove("hidden");
+
+    if (granted.length) {
+      let last = null, shade = false;
+      granted.forEach(function (r) {
+        const first = r.block_code !== last;
+        if (first) { shade = !shade; last = r.block_code; }
+        const cls = (first ? "grp-start " : "") + (shade ? "shade" : "");
+        const c = first ? "" : "cont";
+        const tr = document.createElement("tr");
+        tr.className = cls.trim();
+        tr.appendChild(el("td", first ? (r.block_code || "-") : "·", c));
+        tr.appendChild(el("td", first ? num(r.block_km_from) + " - " + num(r.block_km_to) : "·", c));
+        tr.appendChild(el("td", first ? hm(r.block_start) + " - " + hm(r.block_end) : "·", c));
+        tr.appendChild(el("td", r.request_id));
+        tr.appendChild(el("td", r.department || "-"));
+        tr.appendChild(el("td", r.reason_requested || "-", "wrap"));
+        tr.appendChild(el("td", score(r.priority_score)));
+        tr.appendChild(el("td", hm(r.preferred_from)));
+        tr.appendChild(el("td", hm(r.slot_start) + " - " + hm(r.slot_end)));
+        tr.appendChild(el("td", r.delay_minutes === null || r.delay_minutes === undefined ? "-" : r.delay_minutes + " min"));
+        $("grantedBody").appendChild(tr);
+      });
+      $("grantedTitle").classList.remove("hidden");
+      $("grantedWrap").classList.remove("hidden");
+    }
+
+    if (others.length) {
+      others.forEach(function (r) {
+        const tr = document.createElement("tr");
+        tr.appendChild(el("td", r.request_id));
+        tr.appendChild(el("td", r.department || "-"));
+        tr.appendChild(el("td", r.reason_requested || "-", "wrap"));
+        tr.appendChild(el("td", score(r.priority_score)));
+        tr.appendChild(el("td", hm(r.preferred_from)));
+        const td = document.createElement("td");
+        td.appendChild(el("span", r.status === "REJECTED" ? "Rejected" : "Not selected",
+                          "badge " + (r.status === "REJECTED" ? "rej" : "nosel")));
+        tr.appendChild(td);
+        tr.appendChild(el("td", r.outcome_reason || "-", "wrap"));
+        $("noBlockBody").appendChild(tr);
+      });
+      $("noBlockTitle").classList.remove("hidden");
+      $("noBlockWrap").classList.remove("hidden");
+    }
+  }
+
+  async function loadSchedule() {
+    const d = $("schedDate").value;
+    if (!d) return;
+    try {
+      const data = await api("/schedule?date=" + encodeURIComponent(d));
+      currentRun = data.run;
+      render(data);
+    } catch (e) {
+      showNotice(e.message, "error");
+    }
+  }
+
+  async function loadState() {
+    try {
+      const s = await api("/state");
+      const lp = s.latest_priority;
+      $("priorityInfo").textContent = lp
+        ? "Priority engine last finished: " + fmtDateTime(lp.finished_at) + " (run " + lp.run_id + ")"
+        : "The priority engine has not been run yet.";
+      return s;
+    } catch (e) {
+      showNotice(e.message, "error");
+      return null;
+    }
+  }
+
+  // --------------------------------------------------------- priority engine ----
+  async function waitForPriority(runId) {
+    const t0 = Date.now();
+    for (;;) {
+      showProgress("Priority engine is running... " + Math.round((Date.now() - t0) / 1000) + " s", null);
+      await sleep(2000);
+      if (runId !== null) {
+        const s = await api("/priority/status/" + runId);
+        if (s.status === "done") { showNotice("Priority engine finished: " + (s.message || ""), "ok"); return; }
+        if (s.status !== "running") { showNotice("Priority engine failed: " + (s.message || "unknown error"), "error"); return; }
+      } else {                                           // page was reopened while it was running
+        const st = await api("/state");
+        if (!st.priority_running) { showNotice("Priority engine finished.", "ok"); return; }
+      }
+    }
+  }
+
+  async function runPriority() {
+    if (busy) return;
+    setBusy(true);
+    showNotice("");
+    try {
+      const r = await api("/priority/run", { method: "POST" });
+      await waitForPriority(r.run_id);
+    } catch (e) {
+      showNotice(e.message, "error");
+    } finally {
+      hideProgress();
+      setBusy(false);
+      loadState();
+    }
+  }
+
+  // ---------------------------------------------------------------- generate ----
+  async function followJob(jobId) {
+    for (;;) {
+      let s;
+      try {
+        s = await api("/generate/status/" + jobId);
+      } catch (e) {
+        if (e.status === 404) { showNotice(e.message, "warn"); break; }
+        throw e;
+      }
+      if (s.status === "running") {
+        showProgress("Step " + Math.max(s.step, 1) + " of 6: " + s.label + "  (" + Math.round(s.seconds) + " s)", s.step / 6);
+        await sleep(1500);
+        continue;
+      }
+      if (s.status === "done") {
+        showNotice(s.message, s.summary && s.summary.unscored ? "warn" : "ok");
+      } else {
+        showNotice(s.message || "Generating the schedule failed.", "error", s.problems);
+      }
+      break;
+    }
+    await loadSchedule();                                // always show what is saved for the date
+  }
+
+  async function generate() {
+    if (busy) return;
+    const d = $("schedDate").value;
+    if (!d) { showNotice("Choose a block date first.", "warn"); return; }
+    if (currentRun && !window.confirm("A schedule for " + fmtDate(d) +
+        " is already saved. Generating again will replace it. Continue?")) return;
+    setBusy(true);
+    showNotice("");
+    try {
+      showProgress("Starting...", 0);
+      const j = await api("/generate", { method: "POST", body: { block_date: d } });
+      await followJob(j.job_id);
+    } catch (e) {
+      showNotice(e.message, "error");
+    } finally {
+      hideProgress();
+      setBusy(false);
+    }
+  }
+
+  // -------------------------------------------------------------------- start ----
+  async function init() {
+    $("schedDate").value = tomorrow();
+    $("priorityBtn").addEventListener("click", runPriority);
+    $("generateBtn").addEventListener("click", generate);
+    $("schedDate").addEventListener("change", function () { showNotice(""); loadSchedule(); });
+
+    const s = await loadState();
+    await loadSchedule();
+    if (s && s.generating && s.current_job_id) {          // the page was reopened while a job was running
+      setBusy(true);
+      try { await followJob(s.current_job_id); } catch (e) { showNotice(e.message, "error"); }
+      hideProgress(); setBusy(false);
+    } else if (s && s.priority_running) {
+      setBusy(true);
+      try { await waitForPriority(null); } catch (e) { showNotice(e.message, "error"); }
+      hideProgress(); setBusy(false); loadState();
+    }
+  }
+
+  init();
+})();
+</script>
 </body>
 </html>

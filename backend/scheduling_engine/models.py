@@ -78,3 +78,50 @@ class FeasibleRequest:
     request: Request
     busy: list[tuple[datetime, datetime]]   # merged busy intervals incl. margins
     starts: list[datetime]                  # start times where the full duration fits
+
+
+@dataclass(frozen=True)
+class Candidate:
+    """One possible block: a stretch on a line for a time period, and the requests it could serve."""
+    candidate_id: int
+    line: int
+    lo: float
+    hi: float
+    start: datetime
+    end: datetime
+    request_ids: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class Assignment:
+    """A request granted a work slot inside a chosen block."""
+    block_id: str             # the request's id
+    block_no: int             # number of the chosen block it works in
+    start: datetime
+    end: datetime
+    delay_minutes: int        # minutes after the preferred start
+
+
+@dataclass(frozen=True)
+class ChosenBlock:
+    block_no: int
+    candidate_id: int
+    line: int
+    lo: float
+    hi: float
+    start: datetime
+    end: datetime
+    request_ids: tuple[str, ...]
+
+
+@dataclass
+class Step4Result:
+    status: str                       # "OPTIMAL" or "FEASIBLE" (time limit reached)
+    blocks: list[ChosenBlock]
+    assignments: list[Assignment]
+    unassigned: list[str]             # feasible requests that got no block
+    total_score: int                  # rounded priority score granted
+    total_block_minutes: int
+    n_blocks: int
+    total_delay_minutes: int
+    seconds: float

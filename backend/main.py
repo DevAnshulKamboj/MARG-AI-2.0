@@ -9,6 +9,7 @@ from core import models
 from core.database import Base, engine
 from auth.routes import router as auth_router
 from block_requests.routes import router as block_requests_router
+from scheduler_routes import router as scheduler_router
 
 from engine_routes import router as engine_router
 
@@ -34,6 +35,7 @@ async def no_cache(request, call_next):
 
 app.include_router(auth_router, prefix="/api")
 app.include_router(block_requests_router, prefix="/api")
+app.include_router(scheduler_router, prefix="/api")
 app.include_router(engine_router)
 
 

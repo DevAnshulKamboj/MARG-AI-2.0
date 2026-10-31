@@ -26,7 +26,7 @@ from pathlib import Path
 
 # ----------------------------- CONFIG ---------------------------------------
 PROJECT_DIR = Path(r"D:\PROJECT MARG-AI\Development\VERSION CONTROL\Version 4\Version 4")   # folder that is a git repo
-LOCAL_PORT = 8000                                # port your backend listens on
+LOCAL_PORT = 8001                                # port your backend listens on
 FILE_EXTENSIONS = {".html", ".js", ".css", ".json", ".env", ".md"}
 SKIP_DIRS = {".git", "node_modules", "__pycache__", "venv", ".venv"}
 HEALTH_PATH = "/"            # any HTTP response (even 404) counts as "alive"

@@ -10,7 +10,7 @@ from datetime import date, timedelta
 
 from sqlalchemy import text
 
-from .config import DIRECTION_TO_LINE
+from .config import DIRECTION_TO_LINE, ENABLED_LINES
 from .models import Rejection, Request
 
 
@@ -79,6 +79,10 @@ def validate_requests(rows: list[dict], block_date: date,
         direction = (r.get("direction") or "").strip().upper()
         if direction not in DIRECTION_TO_LINE:
             reject(f"direction '{r.get('direction')}' is not Up or Down")
+            continue
+        if DIRECTION_TO_LINE[direction] not in ENABLED_LINES:
+            reject(f"{direction.title()} line (line {DIRECTION_TO_LINE[direction]}) is not handled yet; "
+                   f"only the SRE-LDH line (line 2, Down) is scheduled")
             continue
 
         if r.get("location_from") is None or r.get("location_to") is None:

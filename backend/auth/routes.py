@@ -46,7 +46,7 @@ def dashboard_data(user: User = Depends(current_user)):
 class BlockCreate(BaseModel):
     station: str = Field(min_length=1)
     sub_section: str = Field(min_length=1)
-    direction: Literal["Up", "Down"]
+    direction: Literal["UP", "DOWN"]
     line: str = Field(min_length=1)
     km_from: int = Field(ge=0)
     meter_from: int = Field(ge=0, le=999)
