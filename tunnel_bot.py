@@ -25,7 +25,7 @@ import urllib.request
 from pathlib import Path
 
 # ----------------------------- CONFIG ---------------------------------------
-PROJECT_DIR = Path(r"D:\PROJECT MARG-AI\Development\VERSION CONTROL\Version 4\Version 4")   # folder that is a git repo
+PROJECT_DIR = Path(r"D:\PROJECT MARG-AI\Development\VERSION CONTROL\Version 5\Version 5")   # folder that is a git repo
 LOCAL_PORT = 8001                                # port your backend listens on
 FILE_EXTENSIONS = {".html", ".js", ".css", ".json", ".env", ".md"}
 SKIP_DIRS = {".git", "node_modules", "__pycache__", "venv", ".venv"}
@@ -106,14 +106,6 @@ def commit_and_push(new_url):
         return
     git("commit", "-m", f"Update tunnel URL to {new_url}")
     result = git("push")
-    if result.returncode != 0:
-        log("Push rejected, pulling remote changes first...")
-        pull = git("pull", "--rebase", "--autostash")
-        if pull.returncode != 0:
-            git("rebase", "--abort")
-            log(f"Pull failed (conflict?): {pull.stderr.strip()}")
-            return
-        result = git("push")
     if result.returncode == 0:
         log("Pushed to GitHub.")
     else:
