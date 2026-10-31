@@ -106,6 +106,14 @@ def commit_and_push(new_url):
         return
     git("commit", "-m", f"Update tunnel URL to {new_url}")
     result = git("push")
+    if result.returncode != 0:
+        log("Push rejected, pulling remote changes first...")
+        pull = git("pull", "--rebase", "--autostash")
+        if pull.returncode != 0:
+            git("rebase", "--abort")
+            log(f"Pull failed (conflict?): {pull.stderr.strip()}")
+            return
+        result = git("push")
     if result.returncode == 0:
         log("Pushed to GitHub.")
     else:
