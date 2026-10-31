@@ -2,13 +2,8 @@
 // When the page is served by your local FastAPI (port 8000), call the same server.
 // Otherwise (GitHub Pages) call the tunnel.
 const IS_LOCAL_SERVER =
-<<<<<<< HEAD
-  ["127.0.0.1", "localhost"].includes(location.hostname) && location.port === "8001";
-const API = IS_LOCAL_SERVER ? "" : "https://keen-storage-radio-peace.trycloudflare.com";
-=======
   ["127.0.0.1", "localhost"].includes(location.hostname) && location.port === "8000";
-const API = IS_LOCAL_SERVER ? "" : "https://keen-storage-radio-peace.trycloudflare.com";
->>>>>>> 85f6f14ed98e4779bffa28329a700da5efe31301
+const API = IS_LOCAL_SERVER ? "" : "https://kai-swap-zones-juice.trycloudflare.com";
 
 const HEADERS = { "x-api-key": "marg-test-key-123" };   // must match ENGINE_API_KEY in .env
 
