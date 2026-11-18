@@ -1,9 +1,9 @@
 const API_BASE = window.location.hostname.endsWith("github.io")
 <<<<<<< HEAD
-    ? "https://neo-massage-testament-museum.trycloudflare.com"
+    ? "https://penguin-reporters-lifestyle-stands.trycloudflare.com"
     : (window.location.port === "8000" ? "" : "http://127.0.0.1:8001");
 =======
-    ? "https://neo-massage-testament-museum.trycloudflare.com"
+    ? "https://penguin-reporters-lifestyle-stands.trycloudflare.com"
     : (window.location.port === "8000" ? "" : "http://127.0.0.1:8001");
 >>>>>>> 85f6f14ed98e4779bffa28329a700da5efe31301
 const TOKEN_KEY = "marg_access_token";
