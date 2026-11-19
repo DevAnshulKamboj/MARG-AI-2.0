@@ -25,7 +25,7 @@ import urllib.request
 from pathlib import Path
 
 # ----------------------------- CONFIG ---------------------------------------
-PROJECT_DIR = Path(r"D:\PROJECT MARG-AI\Development\VERSION CONTROL\Version 5\Version 5")   # folder that is a git repo
+PROJECT_DIR = Path(r"C:\PROJECT MARG-AI\Development\VERSION CONTROL\Version 5\Version 5")   # folder that is a git repo
 LOCAL_PORT = 8000                                # port your backend listens on
 FILE_EXTENSIONS = {".html", ".js", ".css", ".json", ".env", ".md"}
 SKIP_DIRS = {".git", "node_modules", "__pycache__", "venv", ".venv"}
